@@ -1,5 +1,6 @@
-<h1>HELLO!</h1>
+<%= javascript_pack_tag 'application' %>
 
-<p>elapsed since page load: <span id="counter">0</span></p>
+<%= react_component 'app/App' %>
 
-<%= javascript_pack_tag 'counter' %>
+<div id="root"/>
+<div id="modal-root"/>

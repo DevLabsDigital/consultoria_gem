@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.react-datepicker {
+    font-size: 1.2rem!important;
+}
+.react-datepicker__header {
+    padding-top: 0.8rem;
+}
+.react-datepicker__month {
+    margin: 0.4rem 1rem;
+}
+.react-datepicker__day-name, .react-datepicker__day {
+    width: 2.4rem!important;
+    line-height: 2.4rem!important;
+    margin: 0.300rem;
+    font-size: 1.2rem!important;
+
+}
+.react-datepicker__current-month {
+    font-size: 1.2rem!important;
+}
+.react-datepicker__navigation {
+    top: 1rem;
+    line-height: 1.7rem;
+    border: 0.45rem solid transparent;
+}
+.react-datepicker__navigation--previous {
+    border-right-color: #ccc;
+    left: 1rem;
+}
+.react-datepicker__navigation--next {
+    border-left-color: #ccc;
+    right: 1rem;
+}
+
+.react-datepicker__day--outside-month {
+
+}

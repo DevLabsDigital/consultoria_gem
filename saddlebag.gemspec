@@ -18,4 +18,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 6.0.3", ">= 6.0.3.2"
   spec.add_dependency "webpacker", "~> 5.2.1"
+  spec.add_dependency "react-rails", "2.6.0"
 end
