@@ -7,9 +7,9 @@ module Tasks
 
     def initialize(options, user)
       @description = options.fetch(:description)
-      @saddlebag_checklist_id = options.fetch(:saddlebag_checklist_id)
+      @consultoria_checklist_id = options.fetch(:consultoria_checklist_id)
       @user = user
-      @task = Saddlebag::Task.new
+      @task = Consultoria::Task.new
     end
 
     def save!
@@ -18,11 +18,11 @@ module Tasks
 
     private
 
-    attr_reader :description, :saddlebag_checklist_id
+    attr_reader :description, :consultoria_checklist_id
 
     def create_task!
       task.description = description
-      task.saddlebag_checklist_id = saddlebag_checklist_id
+      task.consultoria_checklist_id = consultoria_checklist_id
       task.save!
       create_card_history task
     end

@@ -7,7 +7,7 @@ module BoardsServices
 
     def initialize(options)
       @title = options.fetch(:title)
-      @board = Saddlebag::Board.new
+      @board = Consultoria::Board.new
     end
 
     def save!
@@ -28,7 +28,7 @@ module BoardsServices
 
     def create_lists_relationship_board!
       lists_enums_status.each do |current_status|
-        Saddlebag::List.create!(status: current_status, board: board)
+        Consultoria::List.create!(status: current_status, board: board)
       end
     end
 

@@ -7,7 +7,7 @@ module Cards
   
       def initialize(options, user)
         @card_params = options
-        @card = Saddlebag::Card.find(options[:id])
+        @card = Consultoria::Card.find(options[:id])
         @user = user
       end
   

@@ -53,7 +53,7 @@ const ModalItemQuadro = () => {
 
 
     const handleRemoveTag = tagId => {
-        dispatch(deleteTag({saddlebag_tag_id: tagId, cardId: cardValue.id}))
+        dispatch(deleteTag({consultoria_tag_id: tagId, cardId: cardValue.id}))
     }
 
     const changeNewCommentInputValue = (e) => {

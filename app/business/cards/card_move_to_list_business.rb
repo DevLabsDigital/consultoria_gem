@@ -6,8 +6,8 @@ module Cards
     attr_reader :moved_card
 
     def initialize(params, user)
-      @moved_card = Saddlebag::Card.find_by(id: params[:id].to_i)
-      @saddlebag_list_id = params[:saddlebag_list_id].to_i
+      @moved_card = Consultoria::Card.find_by(id: params[:id].to_i)
+      @consultoria_list_id = params[:consultoria_list_id].to_i
       @position = params[:position].to_i
     end
 
@@ -17,10 +17,10 @@ module Cards
 
     private
 
-    attr_reader :saddlebag_list_id, :position
+    attr_reader :consultoria_list_id, :position
 
     def update_card_list!
-      @moved_card.saddlebag_list_id = saddlebag_list_id
+      @moved_card.consultoria_list_id = consultoria_list_id
       @moved_card.position = position
       #@moved_card.user = @user
       @moved_card.save!

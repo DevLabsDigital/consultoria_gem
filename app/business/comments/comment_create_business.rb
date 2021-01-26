@@ -7,7 +7,7 @@ module Comments
 
     def initialize(comment_params, user)
       @comment_params = comment_params
-      @comment = Saddlebag::Comment.new
+      @comment = Consultoria::Comment.new
       @user = user
     end
 

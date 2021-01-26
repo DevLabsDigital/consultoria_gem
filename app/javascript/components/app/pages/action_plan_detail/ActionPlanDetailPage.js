@@ -41,10 +41,10 @@ const ActionPlanDetailPage = () => {
         if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
         //faco a requisicao para alterar a posicao
-        const saddlebag_list_id = items[destination.droppableId].id
+        const consultoria_list_id = items[destination.droppableId].id
         let id = items[source.droppableId].ids[source.index]
         dispatch(changeActionPlanCardPosition({
-            data: {saddlebag_list_id, id, position: destination.index},
+            data: {consultoria_list_id, id, position: destination.index},
             idToRefresh: params.id
         }))
 

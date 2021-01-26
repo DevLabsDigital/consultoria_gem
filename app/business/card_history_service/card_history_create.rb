@@ -18,9 +18,9 @@ module CardHistoryService
     private
 
     def create_card_history
-      @s = Saddlebag::CardHistory.new
+      @s = Consultoria::CardHistory.new
       @s.user_id = user.id
-      @s.saddlebag_card_id = card.id
+      @s.consultoria_card_id = card.id
       @s.kind = kind
       @s.alteration = text
       @s.save!

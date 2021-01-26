@@ -23,7 +23,7 @@ const ModalCopyCard = () => {
     }
 
     const save = () => {
-        dispatch(copyCard({cardId, listId, value: {id: cardId, title: inputValue, saddlebag_list_id: listId}}))
+        dispatch(copyCard({cardId, listId, value: {id: cardId, title: inputValue, consultoria_list_id: listId}}))
     }
 
     return (

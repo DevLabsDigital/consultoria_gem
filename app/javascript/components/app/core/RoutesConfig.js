@@ -12,7 +12,7 @@ const RoutesConfig = () => {
            <>
                 
                 <Route path={ActionPlanPage.routeName + '/:id'} component={ActionPlanDetailPage} />
-                <Route path={"/saddlebag/counter"} exact component={ActionPlanPage} />
+                <Route path={"/consultoria/counter"} exact component={ActionPlanPage} />
             </>
     );
 };

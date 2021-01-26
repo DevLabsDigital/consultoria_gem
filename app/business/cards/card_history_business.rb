@@ -20,9 +20,9 @@ module Cards
     def card_history
       card.changes.to_a.each do |card_history|
         kind_parse = kind(card_history[0])
-        Saddlebag::CardHistory.create!({
+        Consultoria::CardHistory.create!({
           user_id: user.id,
-          saddlebag_card_id: card.id,
+          consultoria_card_id: card.id,
           kind: card_history[0],
           alteration: "O usuário #{user.name} alterou o #{kind_parse} de #{card_history[1][0]} para #{card_history[1][1]}"
         })

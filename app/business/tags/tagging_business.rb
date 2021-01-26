@@ -7,7 +7,7 @@ module Tags
 
     def initialize(tagging_params, user)
       @tagging_params = tagging_params
-      @tagging = Saddlebag::Tagging.new
+      @tagging = Consultoria::Tagging.new
       @user = user
     end
 

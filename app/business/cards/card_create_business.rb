@@ -7,7 +7,7 @@ module Cards
 
     def initialize(card_params, user)
       @card_params = card_params
-      @card = Saddlebag::Card.new
+      @card = Consultoria::Card.new
       @user = user
     end
 
@@ -27,7 +27,7 @@ module Cards
     end
 
     def list
-      @list ||= Saddlebag::List.find card_params['saddlebag_list_id']
+      @list ||= Consultoria::List.find card_params['consultoria_list_id']
     end
   end
 end

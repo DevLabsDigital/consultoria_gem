@@ -252,7 +252,7 @@ function* requestAddTag({payload}) {
         const {name, cardId} = payload
 
         const {data} = yield call(api.post, `${boardId}/tags`, {name})
-        yield call(api.post, `${cardId}/tagging`, {saddlebag_tag_id: data.data.id})
+        yield call(api.post, `${cardId}/tagging`, {consultoria_tag_id: data.data.id})
         yield put(closeAddTagModal())
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
     } catch (e) {
@@ -282,7 +282,7 @@ function* requestCopyCard({payload}) {
         const {listId, cardId, value} = payload
 
         const {data} = yield call(api.post, `${listId}/cards/copy_card`, {...value})
-        yield call(api.post, `${cardId}/tagging`, {saddlebag_tag_id: data.data.id})
+        yield call(api.post, `${cardId}/tagging`, {consultoria_tag_id: data.data.id})
         yield put(closeAddTagModal())
         yield put(closeItemModal())
     } catch (e) {
@@ -294,9 +294,9 @@ function* requestCopyCard({payload}) {
 function* requestDeleteTag({payload}) {
     try {
         const {items} = yield select(state => state.actionPlanDetail)
-        const {saddlebag_tag_id, cardId} = payload
+        const {consultoria_tag_id, cardId} = payload
 
-        yield call(api.delete, `${cardId}/tagging`, {data: {saddlebag_tag_id}})
+        yield call(api.delete, `${cardId}/tagging`, {data: {consultoria_tag_id}})
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
     } catch (e) {
         genericError()

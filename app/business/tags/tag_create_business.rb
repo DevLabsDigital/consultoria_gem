@@ -7,7 +7,7 @@ module Tags
 
     def initialize(tag_params)
       @tag_params = tag_params
-      @tag = Saddlebag::Tag.new
+      @tag = Consultoria::Tag.new
     end
 
     def save!

@@ -7,7 +7,7 @@ module BoardsServices
   
       def initialize(board, options)
         @title = options.fetch(:title)
-        @board = Saddlebag::Board.find(options[:id])
+        @board = Consultoria::Board.find(options[:id])
       end
   
       def update!

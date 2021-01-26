@@ -7,7 +7,7 @@ module Tasks
     attr_reader :task
 
     def initialize(options, user)
-      @task = Saddlebag::Task.find_by(id: options[:id])
+      @task = Consultoria::Task.find_by(id: options[:id])
       @description = options.fetch(:description)
       @user = user
     end

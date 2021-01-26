@@ -6,7 +6,7 @@ module Comments
 
     def initialize(options)
       @description = options.fetch(:description)
-      @comment = Saddlebag::Comment.find_by(id: options[:id])
+      @comment = Consultoria::Comment.find_by(id: options[:id])
     end
 
     def update!

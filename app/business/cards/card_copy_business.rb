@@ -6,9 +6,9 @@ module Cards
     attr_reader :copied_card
 
     def initialize(card_params)
-      @card = Saddlebag::Card.find card_params[:id]
+      @card = Consultoria::Card.find card_params[:id]
       @title = card_params[:title]
-      @list = card_params[:saddlebag_list_id]
+      @list = card_params[:consultoria_list_id]
     end
 
     def copy_card!
@@ -22,7 +22,7 @@ module Cards
     def duplicate_card!
       @copied_card = @card.dup
       @copied_card.title = @title unless @title.blank?
-      @copied_card.saddlebag_list_id = @list unless @list.blank?
+      @copied_card.consultoria_list_id = @list unless @list.blank?
       @copied_card.save!
     end
 

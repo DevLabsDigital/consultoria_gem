@@ -7,10 +7,10 @@ module Comments
 
     def initialize(comment_params, user)
       @comment_params = comment_params
-      @comment = Saddlebag::Comment.find_by(id: comment_params[:id])
-      @card = Saddlebag::Card.find_by(id: comment_params[:card_id])
+      @comment = Consultoria::Comment.find_by(id: comment_params[:id])
+      @card = Consultoria::Card.find_by(id: comment_params[:card_id])
       @user = user
-      @reply = Saddlebag::Comment.new
+      @reply = Consultoria::Comment.new
     end
 
     def save!
@@ -24,8 +24,8 @@ module Comments
     def reply_comment!
       reply.description = comment_params[:description]
       reply.user_id = @user.id
-      reply.saddlebag_comment_id = comment.id
-      reply.saddlebag_card_id = card.id
+      reply.consultoria_comment_id = comment.id
+      reply.consultoria_card_id = card.id
       reply.save!
       create_card_history reply
     end
