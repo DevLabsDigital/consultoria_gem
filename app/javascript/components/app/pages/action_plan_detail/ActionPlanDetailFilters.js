@@ -15,6 +15,8 @@ import {handleFilterCheck, loadActionPlanData, loadActionPlanDataSuccess} from "
 import { useDebounce } from 'use-debounce';
 import ModalAddUserFilter from "./ModalAddUserFilter";
 import {HOST_URL} from "../../util/values_util";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 const noUser = require('../../assets/user.png')
 
 const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
@@ -82,7 +84,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
         <>
         <FilterContainer>
             <Padding>
-                <Input placeholder={'Procure uma tarefa'} icon={'fas fa-search'} value={text} onChange={e => setText(e.target.value)}/>
+                <Input placeholder={'Procure uma tarefa'} icon={'fa fa-search'} value={text} onChange={e => setText(e.target.value)}/>
                 <CollapsedButton onClick={toogleVisibility}><i
                     className={`fas fa-angle-double-${isExpanded ? 'right' : 'left'}`}/></CollapsedButton>
             </Padding>
@@ -105,7 +107,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                         ))
                     }
                 </FiltrosCausaRazaoContainer>
-                <ClearFilter isExpanded={isExpanded} onClick={() => setTagsSelected([])}><i className="far fa-trash-alt"/> limpar filtro</ClearFilter>
+                <ClearFilter isExpanded={isExpanded} onClick={() => setTagsSelected([])}><i className="fa fa-trash-alt"/> limpar filtro</ClearFilter>
             </Padding>
             <DividerWithMargin/>
 
@@ -134,7 +136,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                                 return (
                                     <UserRowPlusButton>
                                         <UserRow img={user.attributes.avatar ? HOST_URL + user.attributes.avatar : noUser} name={user.attributes.name} remove={() => setUsersSelected(prev => prev.filter(v => v.id !== user.id))}/>
-                                        <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fas fa-plus-circle"/></PlusButton>
+                                        <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fa fa-plus-circle"/></PlusButton>
                                     </UserRowPlusButton>
                                 )
                             } else {
@@ -145,7 +147,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                         }) : (
                                 <UserRowPlusButton>
                                     <UserRow noImage={true} name={'Adicionar usuario'} />
-                                    <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fas fa-plus-circle"/></PlusButton>
+                                    <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fa fa-plus-circle"/></PlusButton>
                                 </UserRowPlusButton>
                             )
                     }
@@ -160,7 +162,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
             {/*    <MarginChildren>*/}
             {/*        <UserRowPlusButton>*/}
             {/*            <UserRow img={require('../../assets/random_person_2.jpg')} name={'Douglas Jason'}/>*/}
-            {/*            <PlusButton><i className="fas fa-plus-circle"/></PlusButton>*/}
+            {/*            <PlusButton><i className="fa fa-plus-circle"/></PlusButton>*/}
             {/*        </UserRowPlusButton>*/}
             {/*    </MarginChildren>*/}
             {/*</Padding>*/}
@@ -169,7 +171,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                 setTagsSelected([])
                 setUsersSelected([])
                 setText('')
-            }}><i className="far fa-trash-alt"/> limpar todos os filtros</ClearFilter>
+            }}><i className="fa fa-trash-alt"/> limpar todos os filtros</ClearFilter>
         </FilterContainer>
             <ModalAddUserFilter users={users} close={v => {
                 if(v != null) {

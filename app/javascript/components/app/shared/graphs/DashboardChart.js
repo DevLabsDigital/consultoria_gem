@@ -13,7 +13,7 @@ const DashboardChart = () => {
             header={
                 <>
                     DASHBOARD
-                    <DownloadButton><i className="fas fa-download"/>Download</DownloadButton>
+                    <DownloadButton><i className="fa fa-download"/>Download</DownloadButton>
                 </>
             }
         >

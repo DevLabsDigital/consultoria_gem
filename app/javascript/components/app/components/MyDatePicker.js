@@ -10,7 +10,7 @@ const MyDatePicker = ({placeholder}) => {
         <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
-            customInput={<Input width={11.6} placeholderText={placeholder} icon={'far fa-calendar-alt'}/>}
+            customInput={<Input width={11.6} placeholderText={placeholder} icon={'fa fa-calendar-alt'}/>}
         />
     );
 };

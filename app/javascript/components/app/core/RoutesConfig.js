@@ -10,9 +10,9 @@ import ProtectedRoute from "./ProtectedRoute";
 const RoutesConfig = () => {
     return (
            <>
-                <Route path={DashboardPage.routeName} component={DashboardPage} />
+                
                 <Route path={ActionPlanPage.routeName + '/:id'} component={ActionPlanDetailPage} />
-                <Route path={ActionPlanPage.routeName} exact component={ActionPlanPage} />
+                <Route path={"/saddlebag/counter"} exact component={ActionPlanPage} />
             </>
     );
 };

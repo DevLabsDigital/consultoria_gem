@@ -8,14 +8,12 @@ import Footer from "./Footer";
 const PageLayout = ({children}) => {
     return (
         <PageLayoutContainer>
-            <Topbar/>
-            <DividedScreen>
-                <Navbar/>
-                <MainContainer>
-                    {children}
-                    <Footer />
-                </MainContainer>
-            </DividedScreen>
+            
+            <MainContainer>
+                {children}
+                <Footer />
+            </MainContainer>
+            
         </PageLayoutContainer>
     );
 };

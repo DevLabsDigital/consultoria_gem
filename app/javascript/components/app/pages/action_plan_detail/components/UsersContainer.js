@@ -15,7 +15,7 @@ const UsersContainer = ({img1, img2, img3}) => {
             {img2 ? <UserImg index={1} src={img2}/> : null}
             {img3 ? <UserImg index={2} src={img3}/> : null}
                 {cardValue && !img1 ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Usuario</span> : null}
-                    {cardValue ? <ButtonAddUser style={{marginLeft: !img1 ? '40px' : 0}} className={'fas fa-plus-circle'} onClick={(e) => {
+                    {cardValue ? <ButtonAddUser style={{marginLeft: !img1 ? '40px' : 0}} className={'fa fa-plus-circle'} onClick={(e) => {
                 e.stopPropagation()
                 dispatch(openAddUserModal(cardValue))
                 }} index={!img1? 0 : img1 && !img2 ? 1.5 : img3 ? 3 : 2}/> : null}

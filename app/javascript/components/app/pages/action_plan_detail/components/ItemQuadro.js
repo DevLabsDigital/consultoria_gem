@@ -60,13 +60,13 @@ const ItemQuadro = ({value, listId, index, remove}) => {
                                             }
                                         })
                                     }}>
-                                        <i className="far fa-trash-alt"/>
+                                        <i className="fa fa-trash-alt"/>
                                     </IconContainerStyled>
                                     <IconContainerStyled onClick={(e) => {
                                         e.preventDefault()
                                         e.stopPropagation()
                                         dispatch(openCopyCardModal({listId, cardId: value.id}))
-                                    }}><i className="far fa-clone"/></IconContainerStyled>
+                                    }}><i className="fa fa-clone"/></IconContainerStyled>
                                 </SimpleColumn>
                             </SubContainer>
                             <Footer>
@@ -74,13 +74,13 @@ const ItemQuadro = ({value, listId, index, remove}) => {
                                                 img2={getImage(users[1])}
                                                 img3={getImage(users[2])}/>
                                 <SimpleRow>
-                                    <IconAndLabel><i className="fas fa-paperclip"/> {images.length}</IconAndLabel>
+                                    <IconAndLabel><i className="fa fa-paperclip"/> {images.length}</IconAndLabel>
                                     <IconAndLabel><i
-                                        className="far fa-comment-dots"/> {addZero(value.comments?.length || 0)}
+                                        className="fa fa-comment-dots"/> {addZero(value.comments?.length || 0)}
                                     </IconAndLabel>
                                     {value.finish_date ?
                                         <DateContainer prazoDecorrido={prazoDecorrido}>
-                                            <i className="far fa-calendar-alt"/>
+                                            <i className="fa fa-calendar-alt"/>
                                             25/07/2020
                                         </DateContainer>
                                         : null

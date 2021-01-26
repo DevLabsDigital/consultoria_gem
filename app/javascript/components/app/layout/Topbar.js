@@ -21,7 +21,7 @@ const Topbar = () => {
 
             <SimpleRow>
                 <CompanyImage src={PepsicoImage}/>
-                <CompanySelected>Pepsico <i className="fas fa-chevron-down"/></CompanySelected>
+                <CompanySelected>Pepsico <i className="fa fa-chevron-down"/></CompanySelected>
             </SimpleRow>
             <SimpleRow end={true}>
                 <NavItem>Consultoria</NavItem>
@@ -31,7 +31,7 @@ const Topbar = () => {
             </SimpleRow>
             <VerticalDividerStyled/>
             <SimpleRow spaceBetween>
-                <Notificacoes><i className="far fa-bell"/> Notificações</Notificacoes>
+                <Notificacoes><i className="fa fa-bell"/> Notificações</Notificacoes>
                 <UserDropdown />
             </SimpleRow>
         </TopbarContainer>

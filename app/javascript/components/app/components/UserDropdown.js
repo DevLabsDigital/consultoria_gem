@@ -26,9 +26,9 @@ const UserDropdown = () => {
 
     return (
         <Container onClick={() => setOptionsOpened(prev => !prev)} ref={ref}>
-            {user?.name} <i className="fas fa-chevron-down"/>
+            {user?.name} <i className="fa fa-chevron-down"/>
             <Options isOpen={optionsOpened} onClick={handleLogout}>
-                <i className="fas fa-sign-out-alt" />
+                <i className="fa fa-sign-out-alt" />
                 Sair
             </Options>
         </Container>

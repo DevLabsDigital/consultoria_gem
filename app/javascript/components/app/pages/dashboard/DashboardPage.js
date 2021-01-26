@@ -41,8 +41,8 @@ const DashboardPage = () => {
         () => etapasDashboard.map(value => ({
             ...value, status: value.status === 'ok' ?
                 <OkBudget>{value.status}</OkBudget> : <PendingBudget>{value.status}</PendingBudget>,
-            acoes: <><EditBudget><i className="fas fa-pen"/>editar</EditBudget><DeleteBudget><i
-                className="far fa-trash-alt"/> excluir</DeleteBudget></>
+            acoes: <><EditBudget><i className="fa fa-pen"/>editar</EditBudget><DeleteBudget><i
+                className="fa fa-trash-alt"/> excluir</DeleteBudget></>
         }))
         , []
     )
@@ -103,7 +103,7 @@ const DashboardPage = () => {
             <MainContainer>
                 <SubTopbar>
                     <Title>Etapas do projeto</Title>
-                    <GreenButton><i className="fas fa-plus-circle"/>Nova etapa</GreenButton>
+                    <GreenButton><i className="fa fa-plus-circle"/>Nova etapa</GreenButton>
                 </SubTopbar>
                 <Card>
                     <TableEtapas data={data} columns={columns}/>

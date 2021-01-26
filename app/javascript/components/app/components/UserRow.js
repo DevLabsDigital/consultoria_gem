@@ -6,7 +6,7 @@ import {TextNormal} from "../styles/Typography";
 const UserRow = ({img, name, noImage = false, remove}) => {
     return (
         <UserRowContainer>
-            <SimpleRow>{noImage ? null : <Img src={img} />} {name}</SimpleRow> {noImage ? null : <i className="far fa-trash-alt" style={{cursor: 'pointer'}} onClick={remove}/>}
+            <SimpleRow>{noImage ? null : <Img src={img} />} {name}</SimpleRow> {noImage ? null : <i className="fa fa-trash-alt" style={{cursor: 'pointer'}} onClick={remove}/>}
         </UserRowContainer>
     );
 };

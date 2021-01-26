@@ -53,7 +53,7 @@ const ModalItemQuadro = () => {
 
 
     const handleRemoveTag = tagId => {
-        dispatch(deleteTag({tag_id: tagId, cardId: cardValue.id}))
+        dispatch(deleteTag({saddlebag_tag_id: tagId, cardId: cardValue.id}))
     }
 
     const changeNewCommentInputValue = (e) => {
@@ -111,7 +111,7 @@ const ModalItemQuadro = () => {
                         {!finish_date ? <DatePicker
                             selected={startDate}
                             onChange={defineDate}
-                            customInput={<ButtonAddTag className={'fas fa-plus-circle'}
+                            customInput={<ButtonAddTag className={'fa fa-plus-circle'}
                                                        style={{marginRight: '20px', marginLeft: '-5px'}}/>}
                         /> : null}
                         {date_conclusion ? <DatePicker
@@ -122,7 +122,7 @@ const ModalItemQuadro = () => {
                         {!date_conclusion && finish_date ? <DatePicker
                             selected={startDate}
                             onChange={defineDateConclusion}
-                            customInput={<ButtonAddTag className={'fas fa-plus-circle'}
+                            customInput={<ButtonAddTag className={'fa fa-plus-circle'}
                                                        style={{marginRight: '20px', marginLeft: '-5px'}}/>}
                         /> : null}
 
@@ -138,7 +138,7 @@ const ModalItemQuadro = () => {
                         e.preventDefault()
                         e.stopPropagation()
                         dispatch(openCopyCardModal({listId: list.id, cardId: id}))
-                    }}><i className="far fa-clone"/></IconContainer>
+                    }}><i className="fa fa-clone"/></IconContainer>
                     <IconContainer onClick={(e) => {
                         e.stopPropagation()
                         MySwal.fire({
@@ -155,9 +155,9 @@ const ModalItemQuadro = () => {
                             }
                         })
                     }}>
-                        <i className="far fa-trash-alt"/>
+                        <i className="fa fa-trash-alt"/>
                     </IconContainer>
-                    <IconContainer><i className="fas fa-ellipsis-v"/></IconContainer>
+                    <IconContainer><i className="fa fa-ellipsis-v"/></IconContainer>
                 </ActionsHeader>
             </ModalHeader>
             <Body>
@@ -170,7 +170,7 @@ const ModalItemQuadro = () => {
                     }
                     <SimpleRow>
                         {!tags.length ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Tag</span> : null}
-                        <ButtonAddTag style={{marginLeft: !tags.length ? '10px' : 0}} className={'fas fa-plus-circle'} onClick={() => dispatch(openAddTagModal())}/>
+                        <ButtonAddTag style={{marginLeft: !tags.length ? '10px' : 0}} className={'fa fa-plus-circle'} onClick={() => dispatch(openAddTagModal())}/>
                     </SimpleRow>
                 </SimpleRow>
                 <Title>{title}</Title>
@@ -188,7 +188,7 @@ const ModalItemQuadro = () => {
                     <SimpleRow>
                     {!checklists.length ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Checklist</span> : null}
                     <IconContainer style={{marginLeft: !checklists.length ? '10px' : 0}} onClick={() => dispatch(openAddChecklistModal())}>
-                        <i className="fas fa-plus-circle"/></IconContainer>
+                        <i className="fa fa-plus-circle"/></IconContainer>
                     </SimpleRow>
                 </SimpleRow>
                 {
@@ -290,7 +290,7 @@ const ButtonAddTag = styled.div`
 `
 
 const TagCloseIcon = styled.div.attrs(() => ({
-    children: <i className="fas fa-times"/>,
+    children: <i className="fa fa-times"/>,
 }))`
   position: absolute;
   width: 2rem;

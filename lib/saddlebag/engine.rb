@@ -11,6 +11,9 @@ module Saddlebag
       urls: ["/saddlebag-packs"], root: Saddlebag::Engine.root.join("public")
     )
 
+
+    
+
     initializer "webpacker.proxy" do |app|
       insert_middleware = begin
         Saddlebag.webpacker.config.dev_server.present?
@@ -24,6 +27,16 @@ module Saddlebag
         ssl_verify_none: true,
         webpacker: Saddlebag.webpacker
       )
+    end
+
+    config.autoload_paths << "#{config.root}/app/business"
+
+    initializer :append_migrations do |app|
+      unless app.root.to_s.match root.to_s
+        config.paths["db/migrate"].expanded.each do |expanded_path|
+          app.config.paths["db/migrate"] << expanded_path
+        end
+      end
     end
   end
 end

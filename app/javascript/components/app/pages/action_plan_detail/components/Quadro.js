@@ -19,14 +19,14 @@ const Quadro = ({black, blue, red, green, percentual, headerTitle, headerQtdLabe
                                 </SimpleRow>
                                 <SimpleRow>
                                     <HeaderEndingAction>{headerQtdLabel}</HeaderEndingAction>
-                                    <HeaderEndingAction style={{cursor: 'pointer'}} onClick={addCard}><i className="fas fa-plus-circle"/></HeaderEndingAction>
+                                    <HeaderEndingAction style={{cursor: 'pointer'}} onClick={addCard}><i className="fa fa-plus-circle"/></HeaderEndingAction>
                                 </SimpleRow>
                             </QuadroHeader>
                             <QuadroBody>
                                 <DashedBorder isDraggingOver={snapshot.isDraggingOver}>
                                     {children}
                                     {provided.placeholder}
-                                    <ButtonPlus onClick={addCard}><i className="fas fa-plus-circle"/></ButtonPlus>
+                                    <ButtonPlus onClick={addCard}><i className="fa fa-plus-circle"/></ButtonPlus>
                                 </DashedBorder>
                             </QuadroBody>
                         </QuadroContainer>

@@ -51,12 +51,12 @@ const ActionPlanPage = () => {
             <SimpleColumn>
                 <SubTopbar>
                     <SimpleRow>
-                        <BackButton><i className="fas fa-long-arrow-alt-left"/> Voltar</BackButton>
+                        <BackButton><i className="fa fa-long-arrow-alt-left"/> Voltar</BackButton>
                         <Title>Etapas do projeto</Title>
-                        <ActionButton><i className="fas fa-long-arrow-alt-up"/>N</ActionButton>
+                        <ActionButton><i className="fa fa-long-arrow-alt-up"/>N</ActionButton>
                         <DescriptionActionButton>Para adicionar um novo plano de ação</DescriptionActionButton>
                     </SimpleRow>
-                    <GreenButton onClick={openModalNewActionPlan}><i className="fas fa-plus-circle"/>Plano de
+                    <GreenButton onClick={openModalNewActionPlan}><i className="fa fa-plus-circle"/>Plano de
                         ação</GreenButton>
                 </SubTopbar>
                 <Card>
@@ -65,7 +65,7 @@ const ActionPlanPage = () => {
                             id: board.attributes.id,
                             title: board.attributes.title,
                             acoes: <>
-                                <CommentBudget><i className="far fa-eye"/>Visualizar ATAS</CommentBudget>
+                                <CommentBudget><i className="fa fa-eye"/>Visualizar ATAS</CommentBudget>
                                 <EditBudget onClick={e => {
                                     e.stopPropagation()
                                     dispatch(openNewPlanModal({
@@ -73,7 +73,7 @@ const ActionPlanPage = () => {
                                         title: board.attributes.title,
                                     }))
                                 }
-                                }><i className="fas fa-pen"/>editar</EditBudget>
+                                }><i className="fa fa-pen"/>editar</EditBudget>
                                 <DeleteBudget
                                     onClick={(e) => {
                                         e.stopPropagation()
@@ -96,7 +96,7 @@ const ActionPlanPage = () => {
                                         })
                                     }
                                     }
-                                ><i className="far fa-trash-alt"/> excluir</DeleteBudget></>
+                                ><i className="fa fa-trash-alt"/> excluir</DeleteBudget></>
                         }))
                     } columns={columns}/>
                 </Card>

@@ -50,7 +50,7 @@ const Checklist = ({item, cardId}) => {
                     <BarraProgresso concluidoTotal={diferenca}/>
                     <QtdItens>{addZero(item.tasks.length)}</QtdItens>
                     <IconContainer onClick={() => handleRemoveChecklist(item.id)} hasBackground={false}><i
-                        className="far fa-trash-alt"/></IconContainer>
+                        className="fa fa-trash-alt"/></IconContainer>
                 </SimpleRow>
             </SimpleRow>
             {
@@ -58,7 +58,7 @@ const Checklist = ({item, cardId}) => {
                     return (
                         <CheckboxRow label={task.description} style={{marginBottom: '1rem'}} checked={!!task.completed} onChange={v => handleTaskStatus(v, task.id)}
                                      icon={<IconContainer hasBackground={false} onClick={() => handleRemoveTask(task.id)}><i
-                                         className="far fa-trash-alt"/></IconContainer>}/>
+                                         className="fa fa-trash-alt"/></IconContainer>}/>
                     )
                 })}
             <CommentInput placeholder={'Adicione um item...'} confirm={handleSaveTask} value={taskInputValue}

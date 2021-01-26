@@ -26,7 +26,7 @@ const Navbar = () => {
                 <ListItem>Orçamento</ListItem>
                 <ListItem>Upload</ListItem>
                 <ListItem isOpened={isParamtrosSubmenuOpened} onClick={toogleOpenedParametros}>
-                    Parametrização {isParamtrosSubmenuOpened ? <i className="fas fa-chevron-up" /> : <i className="fas fa-chevron-down" />}
+                    Parametrização {isParamtrosSubmenuOpened ? <i className="fa fa-chevron-up" /> : <i className="fa fa-chevron-down" />}
                     <InnerList>
                         <ListItemInterno>Parametrização Contábil</ListItemInterno>
                         <ListItemInterno>Fluxo de Caixa Direto</ListItemInterno>
@@ -101,7 +101,7 @@ border-bottom: .1rem solid #eaeaea;
 `
 
 const BottomButton = styled(SimpleRow).attrs(() => ({
-    children: <i className="fas fa-angle-double-left" />
+    children: <i className="fa fa-angle-double-left" />
 }))`
 justify-content: center;
 width: 80%;

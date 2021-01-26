@@ -36,7 +36,7 @@ color: ${({theme}) => theme.blueDark};
 `
 
 export const AddButton = styled(GreenButton).attrs(({label}) => ({
-children: <><i className="fas fa-plus-circle"/> {label}</>,
+children: <><i className="fa fa-plus-circle"/> {label}</>,
 }))`
 
 `

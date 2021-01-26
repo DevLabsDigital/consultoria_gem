@@ -14,14 +14,22 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UnProtectedRoute from "./core/UnProtectedRoute";
 import ActionPlanPage from './pages/action_plan/ActionPlanPage'
+
 function App() {
+    
     return (
         <Provider store={store}>
             <MyThemeProvider>
                 <ModalRoot/>
                 <GlobalStyles/>
                 <ToastContainer />
-                <ActionPlanPage />
+                <ConnectedRouter history={history}>
+                    <Switch>
+                        <PageLayout>
+                            <RoutesConfig/>
+                        </PageLayout>
+                    </Switch>
+                </ConnectedRouter>
             </MyThemeProvider>
         </Provider>
     );

@@ -41,10 +41,10 @@ const ActionPlanDetailPage = () => {
         if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
         //faco a requisicao para alterar a posicao
-        const list_id = items[destination.droppableId].id
+        const saddlebag_list_id = items[destination.droppableId].id
         let id = items[source.droppableId].ids[source.index]
         dispatch(changeActionPlanCardPosition({
-            data: {list_id, id, position: destination.index},
+            data: {saddlebag_list_id, id, position: destination.index},
             idToRefresh: params.id
         }))
 
@@ -120,7 +120,6 @@ const ActionPlanDetailPage = () => {
                 newItems = {...newItems, completed: {...newItems.completed, ids: []}}
             }
         }
-
         setRenderedItens(newItems)
     }, [items, filters])
 
@@ -135,16 +134,16 @@ const ActionPlanDetailPage = () => {
             <MainContainer>
                 <SubTopbar>
                     <Title>Etapas do projeto</Title>
-                    {/*<GreenButton><i className="fas fa-plus-circle"/>Adicionar ATA</GreenButton>*/}
+                    {/*<GreenButton><i className="fa fa-plus-circle"/>Adicionar ATA</GreenButton>*/}
                 </SubTopbar>
                 {
                     hasValue(renderedItens) ? <DragDropContext onDragEnd={onDragEnd}>
                             <QuadrosContainer>
                                 <Quadro black percentual={percentualPrevisto} headerTitle={'PREVISTO'}
-                                        headerQtdLabel={addZero(renderedItens.scheduled.ids.length)}
+                                        headerQtdLabel={addZero(renderedItens?.scheduled?.ids?.length)}
                                         droppableId={'scheduled'} addCard={() => openModalNewCard(renderedItens.scheduled.id)}>
                                     {
-                                        renderedItens.scheduled.ids.map((item, index) => {
+                                        renderedItens?.scheduled?.ids.map((item, index) => {
                                             const value = renderedItens.columns[item]
                                             return (
                                                 <ItemQuadro key={value.id} index={index} value={value}
@@ -154,10 +153,10 @@ const ActionPlanDetailPage = () => {
                                     }
                                 </Quadro>
                                 <Quadro blue percentual={percentualEmAndamento} headerTitle={'EM ANDAMENTO'}
-                                        headerQtdLabel={addZero(renderedItens.in_progress.ids.length)}
+                                        headerQtdLabel={addZero(renderedItens.in_progress?.ids?.length)}
                                         droppableId={'in_progress'} addCard={() => openModalNewCard(renderedItens.in_progress.id)}>
                                     {
-                                        renderedItens.in_progress.ids.map((item, index) => {
+                                        renderedItens.in_progress?.ids.map((item, index) => {
                                             const value = renderedItens.columns[item]
                                             return (
                                                 <ItemQuadro key={value.id} index={index} value={value}
@@ -167,10 +166,10 @@ const ActionPlanDetailPage = () => {
                                     }
                                 </Quadro>
                                 <Quadro red percentual={percentualAtrasado} headerTitle={'ATRASADO'}
-                                        headerQtdLabel={addZero(renderedItens.delayed.ids.length)}
+                                        headerQtdLabel={addZero(renderedItens.delayed?.ids?.length)}
                                         droppableId={'delayed'} addCard={() => openModalNewCard(renderedItens.delayed.id)}>
                                     {
-                                        renderedItens.delayed.ids.map((item, index) => {
+                                        renderedItens.delayed?.ids.map((item, index) => {
                                             const value = renderedItens.columns[item]
                                             return (
                                                 <ItemQuadro key={value.id} index={index} value={value}
@@ -180,10 +179,10 @@ const ActionPlanDetailPage = () => {
                                     }
                                 </Quadro>
                                 <Quadro green percentual={percentualCompleto} headerTitle={'CONCLUIDO'}
-                                        headerQtdLabel={addZero(renderedItens.completed.ids.length)}
+                                        headerQtdLabel={addZero(renderedItens.completed?.ids?.length)}
                                         droppableId={'completed'} addCard={() => openModalNewCard(renderedItens.completed.id)}>
                                     {
-                                        renderedItens.completed.ids.map((item, index) => {
+                                        renderedItens.completed?.ids.map((item, index) => {
                                             const value = renderedItens.columns[item]
                                             return (
                                                 <ItemQuadro key={value.id} index={index} value={value}
@@ -211,7 +210,6 @@ export default ActionPlanDetailPage;
 
 const PageContainer = styled.div`
 display: flex;
-max-width: 80vw;
 overflow: hidden;
 `
 
