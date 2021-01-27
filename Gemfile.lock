@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    consultoria (0.1.0)
+    consultoria (0.1.1)
       paper_trail (= 11.1.0)
       rails (~> 5.2.3, >= 5.2.3)
       react-rails (= 2.6.0)
@@ -252,6 +252,7 @@ DEPENDENCIES
   annotate
   bootsnap (>= 1.4.2)
   byebug
+  consultoria!
   devise
   devise_token_auth
   factory_bot_rails
@@ -266,7 +267,6 @@ DEPENDENCIES
   rack-cors
   react-rails
   rspec-rails (~> 4.0.1)
-  consultoria!
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
