@@ -1,9 +1,13 @@
 import axios from 'axios'
 import {getUserLogged} from "../util/auth";
 
+let getUrl = function(){
+    return `${process.env.URL ? ('http://' + process.env.URL) : 'http://127.0.0.1:3000'}/consultoria/api/v1/auth`
+}
+
 const api = axios.create({
-    // baseURL: `${process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3000' : 'https://task-manager-devlabs.herokuapp.com'}/api/v1/auth`,
-    baseURL: 'http://localhost:3000/consultoria/api/v1/auth',
+    baseURL: getUrl()
+    //baseURL: 'http://localhost:3000/consultoria/api/v1/auth',
 })
 
 // api.interceptors.request.use((config) => {
