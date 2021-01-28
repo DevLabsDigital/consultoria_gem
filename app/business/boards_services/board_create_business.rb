@@ -7,6 +7,7 @@ module BoardsServices
 
     def initialize(options)
       @title = options.fetch(:title)
+      @company_id = options.fetch(:company_id)
       @board = Consultoria::Board.new
     end
 
@@ -19,10 +20,11 @@ module BoardsServices
 
     private
 
-    attr_reader :title
+    attr_reader :title, :company_id
 
     def create_board!
       board.title = title
+      board.company_id = company_id
       board.save!
     end
 
