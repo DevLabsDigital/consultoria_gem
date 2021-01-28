@@ -3,6 +3,7 @@ module Consultoria
     module V1
       class AuthController < ActionController::Base
          skip_before_action :verify_authenticity_token
+         before_action :authenticate_user!
         # include DeviseTokenAuth::Concerns::SetUserByToken
         # before_action :authenticate_user!
         # before_action :configure_permitted_parameters, if: :devise_controller?

@@ -5,7 +5,7 @@ module Api
       class BoardsController < AuthController
 
         def index
-          @board = Board.all
+          @board = Board.where(company_id: current_user.consultoria_company_id).all
           render json: serializer_resource(@board), status: :ok
         end
 
@@ -14,13 +14,13 @@ module Api
         end
 
         def search_by
-          board = Board.find(params[:board_id])
+          board = Board.where(company_id: current_user.consultoria_company_id).find(params[:board_id])
           object = ListSerializer.new(board.lists, {params: {options: search_params}})
           render json: object, status: :ok
         end
 
         def create
-          business = BoardsServices::BoardCreateBusiness.new(title: board_params[:title])
+          business = BoardsServices::BoardCreateBusiness.new(title: board_params[:title], company_id: current_user.consultoria_company_id)
           business.save!
 
           render json: serializer_resource(business.board), status: :created
@@ -50,7 +50,7 @@ module Api
         end
 
         def board
-          @board ||= Board.find params[:id]
+          @board ||= Board.where(company_id: current_user.consultoria_company_id).find params[:id]
         end
 
         def serializer_resource(board)
