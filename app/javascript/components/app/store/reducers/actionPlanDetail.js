@@ -196,12 +196,14 @@ function* requestChangeCardPosition({payload}) {
 }
 
 function* requestCreateNewCardActionPlan({payload}) {
+    
     try {
         const {listId, boardId, ...value} = payload
         const {data} = yield call(api.post, `${listId}/cards`, value)
         yield put(closeNewCardModal())
         yield put(openItemModal(data.data))
         yield put(loadActionPlanData(boardId))
+
     } catch (e) {
         genericError()
         console.log(e)
@@ -361,11 +363,13 @@ function* requestEditDescription({payload}) {
         const {description, cardId} = payload
         const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
         const boardId = extractIdFromPathname(pathname)
-
-        yield call(api.put, `${boardId}/cards/${cardId}`, {description})
+        
+        yield call(api.put, `${findListid(cardId, items)}/cards/${cardId}`, {description})
 
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+        yield put(loadActionPlanData(boardId))
     } catch (e) {
+        debugger
         genericError()
         console.log(e)
     }
@@ -393,6 +397,8 @@ function* requestCreateTask({payload}) {
         yield call(api.post, `${cheklistId}/tasks`, {description})
 
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+
+
     } catch (e) {
         genericError()
         console.log(e)

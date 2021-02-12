@@ -2,7 +2,7 @@ import axios from 'axios'
 import {getUserLogged} from "../util/auth";
 
 let getUrl = function(){
-    return `${process.env.URL ? ('http://' + process.env.URL) : 'http://127.0.0.1:3000'}/consultoria/api/v1/auth`
+    return `${process.env.URL ? ('http://' + process.env.URL) : 'http://localhost:3000'}/consultoria/api/v1/auth`
 }
 
 const api = axios.create({

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Input from "../../../components/Input";
 import ModalSimples from "../../action_plan/modais/ModalSimples";
 import {closeNewCardModal, createNewCardActionPlan} from "../../../store/reducers/actionPlanDetail";
-
+import {listBoardRequest} from "../../../store/reducers/actionPlan";
 const ModalNewCard = () => {
 
     const {visible: isVisible, listId, boardId} = useSelector(state => state.actionPlanDetail.newCard)

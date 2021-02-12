@@ -55,10 +55,10 @@ function* requestNewActionPlan({payload}) {
         } else {
             const {data} = yield call(api.put, `/boards/${payload.id}`, {title: payload.title})
             response = data
-            yield put(listBoardRequest())
         }
         yield put(closeNewPlanModal())
         yield put(createNewActionPlanSucess(response))
+        yield put(listBoardRequest())
     } catch (e) {
         genericError()
         console.log(e)

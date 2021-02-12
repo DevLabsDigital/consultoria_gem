@@ -67,12 +67,13 @@ const ModalItemQuadro = () => {
     const [descriptionValue, setDescriptionValue] = useState('')
 
     useEffect(() => {
-        setDescriptionValue(description)
+        setDescriptionValue(description || "")
     }, [cardValue])
 
     const handleDescription = () => {
+      
         dispatch(editDescription({cardId: cardValue.id, description: descriptionValue}))
-        setDescriptionValue('')
+        //setDescriptionValue('')
     }
 
     const defineDate = async (date) => {
@@ -174,7 +175,8 @@ const ModalItemQuadro = () => {
                     </SimpleRow>
                 </SimpleRow>
                 <Title>{title}</Title>
-                <div style={{pointerEvents: descriptionValue != null && descriptionValue !== '' ? 'none' : 'auto' }}>
+                <div >
+                
                 <Description>
                     <Subtitle>DESCRIÇÃO</Subtitle>
                     <CommentInput needFocus placeholder={''} value={descriptionValue}

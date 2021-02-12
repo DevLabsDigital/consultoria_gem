@@ -28,12 +28,12 @@ const CommentInput = ({confirm, value, needFocus = false, openOnCLick = true, ..
     }
 
     return (
-<Container block={value != null && value !== ''}>
-        <InputStyled {...props} rows={isVisible ? 3 : 2} value={value} onKeyDown={handleKeyDown} onFocus={showContent} onBlur={hiddenContent} />
-        <ActionsContainer isVisible={isVisible}>
-            <GreenButtonSmall onClick={confirm}>Salvar</GreenButtonSmall>
-        </ActionsContainer>
-</Container>
+      <Container block={value != null && value !== ''}>
+              <InputStyled {...props} rows={isVisible ? 3 : 2} value={value} onKeyDown={handleKeyDown} onFocus={showContent} onBlur={hiddenContent} />
+              <ActionsContainer isVisible={isVisible}>
+                  <GreenButtonSmall onClick={()=> confirm()}>Salvar</GreenButtonSmall>
+              </ActionsContainer>
+      </Container>
     );
 };
 

@@ -1,7 +1,7 @@
 module Consultoria
   class Card < ApplicationRecord
     belongs_to :list, foreign_key: 'consultoria_list_id'
-    acts_as_list scope: :consultoria_list_id, column: "consultoria_list_id"
+    #acts_as_list scope: :consultoria_list_id, column: "consultoria_list_id"
 
     has_paper_trail 
     
