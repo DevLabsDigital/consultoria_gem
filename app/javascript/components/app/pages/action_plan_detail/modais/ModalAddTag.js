@@ -12,7 +12,8 @@ const ModalAddTag = () => {
     const {cardValue, modalTag} = useSelector(state => state.actionPlanDetail.item)
     const {visible: isVisible} = modalTag
     const dispatch = useDispatch()
-    const [tags, setTags] = useState([])
+    //const [tags, setTags] = useState([])
+    const {tags} = useSelector(state => state.actionPlanDetail)
     const [inputValue, setInputValue] = useState('')
 
     useEffect(() => {
@@ -40,10 +41,13 @@ const ModalAddTag = () => {
         <BaseModal isVisible={isVisible} closeModal={() => {}} width={'36.8rem'} zIndex={50}>
             <ModalSimples title={'ADICIONAR TAG'} confirm={save}>
                 <CreatableSelect
+                    formatCreateLabel={(label)=> `Criar '${label}'`}
+                    noOptionsMessage={()=> "Nenhuma tag corresponde a pesquisa"}
+                    placeholder={'Pesquisa de tags'}
                     isClearable
                     onChange={handleChange}
                     isMulti={false}
-                    options={[]}
+                    options={tags.map(({attributes})=> ({label: attributes.name, value: attributes.name}))}
                 />
             </ModalSimples>
         </BaseModal>

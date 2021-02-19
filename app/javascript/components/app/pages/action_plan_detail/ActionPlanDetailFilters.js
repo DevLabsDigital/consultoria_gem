@@ -12,6 +12,7 @@ import api from "../../core/network";
 import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {handleFilterCheck, loadActionPlanData, loadActionPlanDataSuccess} from "../../store/reducers/actionPlanDetail";
+import {closeAddChecklistModal} from "../../store/reducers/actionPlanDetail";
 import { useDebounce } from 'use-debounce';
 import ModalAddUserFilter from "./ModalAddUserFilter";
 import {HOST_URL} from "../../util/values_util";
@@ -24,7 +25,6 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
     const params = useParams()
     const dispatch = useDispatch()
 
-    const [tags, setTags] = useState([])
     const [tagsSelected, setTagsSelected] = useState([])
 
     const [modalVisible, setModalVisible] = useState(false)
@@ -34,11 +34,10 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
 
     const [text, setText] = useState('');
     const [valueToSearch] = useDebounce(text, 1000);
+    
+    const {tags} = useSelector(state => state.actionPlanDetail)
 
     useEffect(() => {
-        api.get(`/${params.id}/tags`).then(result => {
-            setTags(result.data.data)
-        })
         api.get(`/users`).then(result => {
             setUsers(result.data.data)
         })

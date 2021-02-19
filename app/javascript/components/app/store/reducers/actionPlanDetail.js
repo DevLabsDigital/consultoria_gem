@@ -13,6 +13,7 @@ export const handleOpenCardActionPlan = createAction('actionPlanDetail/handleOpe
 export const handleAddNewCheckList = createAction('actionPlanDetail/handleAddNewCheckList')
 export const handleDeleteCheckList = createAction('actionPlanDetail/handleDeleteCheckList')
 export const handleAddTag = createAction('actionPlanDetail/handleAddTag')
+export const fetchTags = createAction('actionPlanDetail/fetchTags')
 export const handleAddUser = createAction('actionPlanDetail/handleAddUser')
 export const deleteTag = createAction('actionPlanDetail/deleteTag')
 
@@ -44,6 +45,7 @@ const initialState = {
         cardId: null,
         listId: null,
     },
+    tags: [],
     filters: {
         text: '',
         status: {
@@ -100,6 +102,9 @@ const actionPlanDetailSlice = createSlice({
         closeNewCardModal(state, action) {
             state.newCard = {visible: false, listId: null, boardId: null}
         },
+        loadTags(state, action) {
+            state.tags = action.payload.data
+        },
         loadActionPlanDataSuccess(state, action) {
             state.items = action.payload
         },
@@ -153,6 +158,7 @@ export const {
     closeCopyCardModal,
     copyCard,
     handleFilterCheck,
+    loadTags,
 } = actionPlanDetailSlice.actions
 
 export default actionPlanDetailSlice.reducer
@@ -178,11 +184,13 @@ function* requestActionPlanData({payload}) {
 
 
         yield put(loadActionPlanDataSuccess(objFinal))
+        yield put(fetchTags())
     } catch (e) {
         genericError()
         console.log(e)
     }
 }
+
 
 function* requestChangeCardPosition({payload}) {
     try {
@@ -246,7 +254,15 @@ function* requestAddNewCheckList({payload}) {
         console.log(e)
     }
 }
+function* requestTags({payload}){
+    const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
+    const boardId = extractIdFromPathname(pathname)
 
+    const {data} = yield call(api.get, `${boardId}/tags`)
+    
+    yield put(loadTags(data))
+    
+}
 function* requestAddTag({payload}) {
     try {
         const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
@@ -256,6 +272,7 @@ function* requestAddTag({payload}) {
         const {data} = yield call(api.post, `${boardId}/tags`, {name})
         yield call(api.post, `${cardId}/tagging`, {consultoria_tag_id: data.data.id})
         yield put(closeAddTagModal())
+        yield put(fetchTags())
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
     } catch (e) {
         genericError()
@@ -369,7 +386,6 @@ function* requestEditDescription({payload}) {
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
         yield put(loadActionPlanData(boardId))
     } catch (e) {
-        debugger
         genericError()
         console.log(e)
     }
@@ -442,6 +458,7 @@ export function* actionPlanDetailSaga() {
         takeEvery(handleOpenCardActionPlan.type, requestDetailCardActionPlan),
         takeEvery(handleAddNewCheckList.type, requestAddNewCheckList),
         takeEvery(handleAddTag.type, requestAddTag),
+        takeEvery(fetchTags.type, requestTags),
         takeEvery(handleAddUser.type, requestAddUser),
         takeEvery(deleteTag.type, requestDeleteTag),
         takeEvery(handleNewCommentRequest.type, requestNewComment),

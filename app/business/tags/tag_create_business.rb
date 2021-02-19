@@ -7,7 +7,7 @@ module Tags
 
     def initialize(tag_params)
       @tag_params = tag_params
-      @tag = Consultoria::Tag.new
+      @tag = Consultoria::Tag.find_or_initialize_by(tag_params)
     end
 
     def save!

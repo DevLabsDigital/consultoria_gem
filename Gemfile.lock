@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    consultoria (0.3.1)
+    consultoria (0.3.2)
       paper_trail (= 11.1.0)
       rails (~> 5.2.3, >= 5.2.3)
       react-rails (= 2.6.0)
