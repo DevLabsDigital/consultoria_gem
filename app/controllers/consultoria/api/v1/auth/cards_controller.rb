@@ -20,7 +20,6 @@ module Api
         end
 
         def copy_card
-          debugger
           business = Cards::CardCopyBusiness.new(params)
           business.copy_card!
           render json: serializer_resource(business.copied_card), status: :created

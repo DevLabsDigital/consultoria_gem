@@ -28,7 +28,7 @@ module Consultoria
         webpacker: Consultoria.webpacker
       )
     end
-
+    
     config.autoload_paths << "#{config.root}/app/business"
 
     initializer :append_migrations do |app|

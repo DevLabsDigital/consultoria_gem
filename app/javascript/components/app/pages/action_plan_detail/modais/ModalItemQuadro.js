@@ -93,7 +93,7 @@ const ModalItemQuadro = () => {
     const getImage = v => {
         if(v == undefined || v == null) return undefined
         if(!v.avatar) return noUser
-        return HOST_URL + v.avatar
+        return  v.avatar
     }
 
     return (
@@ -178,7 +178,7 @@ const ModalItemQuadro = () => {
                 <div >
                 
                 <Description>
-                    <Subtitle>DESCRIÇÃO</Subtitle>
+                    <Subtitle>Detalhamento / Observações</Subtitle>
                     <CommentInput needFocus placeholder={''} value={descriptionValue}
                                   onChange={(e) => setDescriptionValue(e.target.value)}
                                   confirm={handleDescription}/>

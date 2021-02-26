@@ -3,7 +3,7 @@
 class Consultoria::Api::V1::Auth::UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = Consultoria::User.where(id: current_user.company.users.pluck(:id))
     render json: serializer_resource(@users), status: :ok
   end
 
@@ -21,7 +21,7 @@ class Consultoria::Api::V1::Auth::UsersController < ApplicationController
   end
 
   def user
-    @user ||= User.find params[:id]
+    @user ||= Consultoria::User.find params[:id]
   end
 
 end

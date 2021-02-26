@@ -134,13 +134,13 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                             if(usersSelected.length === i + 1) {
                                 return (
                                     <UserRowPlusButton>
-                                        <UserRow img={user.attributes.avatar ? HOST_URL + user.attributes.avatar : noUser} name={user.attributes.name} remove={() => setUsersSelected(prev => prev.filter(v => v.id !== user.id))}/>
+                                        <UserRow img={user.attributes.avatar ?  user.attributes.avatar : noUser} name={user.attributes.name} remove={() => setUsersSelected(prev => prev.filter(v => v.id !== user.id))}/>
                                         <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fa fa-plus-circle"/></PlusButton>
                                     </UserRowPlusButton>
                                 )
                             } else {
                                 return (
-                                    <UserRow img={user.attributes.avatar ? HOST_URL + user.attributes.avatar : noUser} name={user.attributes.name} remove={() => setUsersSelected(prev => prev.filter(v => v.id !== user.id))}/>
+                                    <UserRow img={user.attributes.avatar ? user.attributes.avatar : noUser} name={user.attributes.name} remove={() => setUsersSelected(prev => prev.filter(v => v.id !== user.id))}/>
                                 )
                             }
                         }) : (

@@ -24,7 +24,7 @@ const ItemQuadro = ({value, listId, index, remove}) => {
     const getImage = v => {
         if(v == undefined || v == null) return undefined
         if(!v.avatar) return noUser
-        return HOST_URL + v.avatar
+        return  v.avatar
     }
 
     return (

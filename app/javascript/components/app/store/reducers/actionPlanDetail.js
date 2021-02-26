@@ -6,6 +6,8 @@ import {findListid} from "../../util/action_plan_util";
 import {genericError} from "../../util/toast_util";
 
 export const loadActionPlanData = createAction('actionPlanDetail/loadData')
+export const loadrequestBoard = createAction('actionPlanDetail/requestBoard')
+
 export const changeActionPlanCardPosition = createAction('actionPlanDetail/changeActionPlanCardPosition')
 export const createNewCardActionPlan = createAction('actionPlanDetail/createNewCardActionPlan')
 export const deleteCardActionPlan = createAction('actionPlanDetail/deleteCardActionPlan')
@@ -40,6 +42,7 @@ const initialState = {
         boardId: null,
     },
     items: [],
+    board: {},
     modalCopyCard: {
         visible: false,
         cardId: null,
@@ -105,6 +108,9 @@ const actionPlanDetailSlice = createSlice({
         loadTags(state, action) {
             state.tags = action.payload.data
         },
+        loadBoardDataSuccess(state, action) {
+            state.board = action.payload
+        },
         loadActionPlanDataSuccess(state, action) {
             state.items = action.payload
         },
@@ -159,6 +165,7 @@ export const {
     copyCard,
     handleFilterCheck,
     loadTags,
+    loadBoardDataSuccess
 } = actionPlanDetailSlice.actions
 
 export default actionPlanDetailSlice.reducer
@@ -185,6 +192,21 @@ function* requestActionPlanData({payload}) {
 
         yield put(loadActionPlanDataSuccess(objFinal))
         yield put(fetchTags())
+    } catch (e) {
+        genericError()
+        console.log(e)
+    }
+}
+
+function* requestBoard({payload}) {
+    try {
+        let response
+        {
+            const {data} = yield call(api.get, `/boards/${payload.id}`)
+            response = data
+        }
+        
+        yield put(loadBoardDataSuccess(response))
     } catch (e) {
         genericError()
         console.log(e)
@@ -301,9 +323,10 @@ function* requestCopyCard({payload}) {
         const {listId, cardId, value} = payload
 
         const {data} = yield call(api.post, `${listId}/cards/copy_card`, {...value})
-        yield call(api.post, `${cardId}/tagging`, {consultoria_tag_id: data.data.id})
-        yield put(closeAddTagModal())
-        yield put(closeItemModal())
+        
+        //yield put(closeAddTagModal())
+        yield put(closeCopyCardModal())
+        yield put(loadActionPlanData(boardId))
     } catch (e) {
         genericError()
         console.log(e)
@@ -451,6 +474,7 @@ function* requestChangeTaskStatus({payload}) {
 
 export function* actionPlanDetailSaga() {
     return yield all([
+        takeEvery(loadrequestBoard.type, requestBoard),
         takeEvery(loadActionPlanData.type, requestActionPlanData),
         takeEvery(changeActionPlanCardPosition.type, requestChangeCardPosition),
         takeEvery(createNewCardActionPlan.type, requestCreateNewCardActionPlan),

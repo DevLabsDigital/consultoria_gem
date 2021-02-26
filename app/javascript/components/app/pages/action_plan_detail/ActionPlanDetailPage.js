@@ -11,8 +11,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     changeActionPlanCardPosition,
     changeTemporalyActionPlanCardPosition, deleteCardActionPlan,
-    loadActionPlanData, openNewCardModal,
+    loadActionPlanData, openNewCardModal, loadrequestBoard
 } from "../../store/reducers/actionPlanDetail";
+
 import {addZero, hasValue} from "../../util/values_util";
 import {calcPercentual} from "../../util/math_util";
 
@@ -20,12 +21,15 @@ const ActionPlanDetailPage = () => {
 
     const params = useParams()
     const dispatch = useDispatch()
-    const {items, filters} = useSelector(state => state.actionPlanDetail)
-
+    
+    const {items, filters, board} = useSelector(state => state.actionPlanDetail)
+    const {currentBoard, setCurrentBoard} = useState({})
     const [renderedItens, setRenderedItens] = useState({})
 
     useEffect(() => {
+        dispatch(loadrequestBoard({id: params.id}))
         dispatch(loadActionPlanData(params.id))
+        console.log(board)
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params])
 
@@ -133,7 +137,7 @@ const ActionPlanDetailPage = () => {
         <PageContainer>
             <MainContainer>
                 <SubTopbar>
-                    <Title>Etapas do projeto</Title>
+                    <Title>{board?.data?.attributes?.title}</Title>
                     {/*<GreenButton><i className="fa fa-plus-circle"/>Adicionar ATA</GreenButton>*/}
                 </SubTopbar>
                 {

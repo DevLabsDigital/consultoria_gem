@@ -12,6 +12,9 @@ module Consultoria
     has_many :card_histories
     has_many :protocols
 
+    def user_profile
+      eval(Consultoria::Engine.config.user_model).where(user_id: self.id).first
+    end
     
   end
 end

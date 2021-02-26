@@ -22,7 +22,7 @@ module Consultoria
         self.checklists.each { |checklist| card.checklists << checklist.dup }
 
         # duplicate tags as well
-        self.tags.each { |tag| card.tags << tag.dup }
+        self.tags.each { |tag| card.tags << tag }
 
         # duplicate taggings as well
         self.taggings.each { |tagging| card.taggings << tagging.dup }
