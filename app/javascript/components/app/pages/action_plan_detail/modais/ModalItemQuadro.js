@@ -35,7 +35,7 @@ import {HOST_URL} from "../../../util/values_util";
 const noUser = require('../../../assets/user.png')
 
 
-const ModalItemQuadro = () => {
+const ModalItemQuadro = (props) => {
     const [startDate, setStartDate] = useState(new Date());
 
     let {visible: isVisible, cardValue, modalChecklist, modalTag, modalUser, newCommentInputValue} = useSelector(state => state.actionPlanDetail.item)
@@ -202,7 +202,7 @@ const ModalItemQuadro = () => {
                 <Divider style={{margin: '3.8rem 0'}}/>
                 <Subtitle>COMENTÁRIOS</Subtitle>
                 <ComentarioContainer style={{margin: '2rem 0 4.2rem'}}>
-                    <UserImg changePosition={false} src={require('../../../assets/random_person_1.jpg')}/>
+                    <UserImg changePosition={false} src={props.current_user.avatar}/>
                     <CommentInput placeholder={'Faça um comentário...'} value={newCommentInputValue}
                                   onChange={(e) => changeNewCommentInputValue(e.target.value)}
                                   confirm={handleNewComment}/>

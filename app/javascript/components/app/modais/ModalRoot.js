@@ -9,14 +9,14 @@ import ModalCopyCard from "../pages/action_plan_detail/modais/ModalCopyCard";
 import ModalAddUser from "../pages/action_plan_detail/modais/ModalAddUser";
 
 
-const ModalRoot = () => ReactDOM.createPortal(
+const ModalRoot = (props) => ReactDOM.createPortal(
     <>
         <ModalAddUser />
         <ModalAddTag />
         <ModalCopyCard />
         <ModalAddChecklist />
         <ModalNewCard />
-        <ModalItemQuadro/>
+        <ModalItemQuadro {...props}/>
         <ModalNovoPlanoAcao />
     </>,
 // @ts-ignore

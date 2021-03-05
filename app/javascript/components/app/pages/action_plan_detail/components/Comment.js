@@ -34,7 +34,7 @@ const Comment = ({replies, ...props}) => {
 export default Comment;
 
 
-const CommentContainer = ({id, comment, description, created_at, children, isReply}) => {
+const CommentContainer = ({id, comment, user, description, created_at, children, isReply}) => {
 
     const dispatch = useDispatch()
     const cardId = useSelector(state => state.actionPlanDetail?.item?.cardValue?.id)
@@ -114,9 +114,9 @@ const CommentContainer = ({id, comment, description, created_at, children, isRep
 
     return (
         <ComentarioContainer key={id} isReply={isReply}>
-            <UserImg changePosition={false} src={require('../../../assets/random_person_1.jpg')}/>
+            <UserImg changePosition={false} src={user.avatar}/>
             <SimpleColumn>
-                <TitleSmall isReply>Amanda - {formatDateTime(created_at)}</TitleSmall>
+                <TitleSmall isReply>{user.name} - {formatDateTime(created_at)}</TitleSmall>
                 {
                     editing.isVisible ? (
                         <CommentInput placeholder={'Faça um comentário...'} value={editing.value}

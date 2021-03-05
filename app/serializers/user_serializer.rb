@@ -3,7 +3,7 @@ class UserSerializer < ApplicationSerializer
 	attributes :email, :name
 
 	attribute :name do |object|
-		object.name.to_s.downcase.titleize
+		object.user_profile.name.to_s.downcase.titleize
 	end
 	attribute :avatar do |object|
 		profile = object.user_profile

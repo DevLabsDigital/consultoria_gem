@@ -1,9 +1,11 @@
 class CardSerializer < ApplicationSerializer
   include FastJsonapi::ObjectSerializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :status, :list, :description, :position, :start_date, :finish_date, :date_conclusion, :tags, :comments, :checklists, :users, :lead, :images, :card_histories
+  attributes :id, :title, :status, :list, :description, :position, :start_date, :finish_date, :date_conclusion, :tags, :checklists, :users, :lead, :images, :card_histories
 
-  
+  attribute :comments do |object|
+    JSON.parse(CommentSerializer.new(object.comments).serialized_json)
+  end  
 
   attribute :users do |object| 
     JSON.parse(UserSerializer.new(object.users).serialized_json)

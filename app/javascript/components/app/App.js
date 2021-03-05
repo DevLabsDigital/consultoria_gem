@@ -15,12 +15,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import UnProtectedRoute from "./core/UnProtectedRoute";
 import ActionPlanPage from './pages/action_plan/ActionPlanPage'
 
-function App() {
-    
+function App(props) {
+    console.log(props)
     return (
         <Provider store={store}>
             <MyThemeProvider>
-                <ModalRoot/>
+                <ModalRoot {...props}/>
                 <GlobalStyles/>
                 <ToastContainer />
                 <ConnectedRouter history={history}>
