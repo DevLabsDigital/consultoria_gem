@@ -8,7 +8,7 @@ module Comments
     def initialize(comment_params, user)
       @comment_params = comment_params
       @comment = Consultoria::Comment.find_by(id: comment_params[:id])
-      @card = Consultoria::Card.find_by(id: comment_params[:card_id])
+      @card = Consultoria::Card.find_by(id: comment_params[:consultoria_card_id])
       @user = user
       @reply = Consultoria::Comment.new
     end
@@ -25,7 +25,7 @@ module Comments
       reply.description = comment_params[:description]
       reply.user_id = @user.id
       reply.consultoria_comment_id = comment.id
-      reply.consultoria_card_id = card.id
+      reply.consultoria_card_id = @card.id
       reply.save!
       create_card_history reply
     end

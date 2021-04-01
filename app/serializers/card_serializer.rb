@@ -4,7 +4,7 @@ class CardSerializer < ApplicationSerializer
   attributes :id, :title, :status, :list, :description, :position, :start_date, :finish_date, :date_conclusion, :tags, :checklists, :users, :lead, :images, :card_histories
 
   attribute :comments do |object|
-    JSON.parse(CommentSerializer.new(object.comments).serialized_json)
+    JSON.parse(CommentSerializer.new(object.comments.no_replies).serialized_json)
   end  
 
   attribute :users do |object| 

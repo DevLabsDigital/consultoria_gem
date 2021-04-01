@@ -38,7 +38,7 @@ const ModalAddTag = () => {
     };
 
     return (
-        <BaseModal isVisible={isVisible} closeModal={() => {}} width={'36.8rem'} zIndex={50}>
+        <BaseModal isVisible={isVisible} closeModal={closeModal} width={'36.8rem'} zIndex={50}>
             <ModalSimples title={'ADICIONAR TAG'} confirm={save}>
                 <CreatableSelect
                     formatCreateLabel={(label)=> `Criar '${label}'`}
