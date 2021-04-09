@@ -46,7 +46,7 @@ const ActionPlanPage = () => {
     }
 
     return (
-        <PageDivided>
+        <div>
             <MyThemeProvider>
             <SimpleColumn>
                 <SubTopbar>
@@ -101,12 +101,12 @@ const ActionPlanPage = () => {
                     } columns={columns}/>
                 </Card>
             </SimpleColumn>
-            <RightContainer>
+            {/*<RightContainer>
                 <HistoryChart/>
                 <DashboardChart/>
-            </RightContainer>
+            </RightContainer>*/}
             </MyThemeProvider>
-        </PageDivided>
+        </div>
     );
 };
 
