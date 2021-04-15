@@ -17,7 +17,7 @@ const ModalAddUserFilter = ({users, visible, close}) => {
                 close()
             }
         }} width={'36.8rem'} zIndex={50}>
-            <ModalSimples title={'ADICIONAR NOVO USUARIO'} confirm={() => {
+            <ModalSimples title={'ADICIONAR NOVO USUÁRIO'} confirm={() => {
                 let value
                 if(userSelected) {
                     value = users.filter(v => v.id == userSelected)[0]
@@ -29,6 +29,7 @@ const ModalAddUserFilter = ({users, visible, close}) => {
                     isMulti={false}
                     options={users && users.length ? users.map(user => ({label: user.attributes.name, value: user.id})) : []}
                 />
+                
             </ModalSimples>
         </BaseModal>
     );

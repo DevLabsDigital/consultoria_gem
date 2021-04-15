@@ -83,6 +83,13 @@ const ModalItemQuadro = (props) => {
         dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
     }
 
+    const redefineStartDate = async (date) => {
+        await api.put(`/${list.id}/cards/${id}`, {
+            start_date: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+        })
+    dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
+}
+
     const defineDateConclusion = async (date) => {
             await api.put(`/${list.id}/cards/${id}`, {
                 date_conclusion: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
@@ -103,7 +110,11 @@ const ModalItemQuadro = (props) => {
             <ModalHeader>
                 <SimpleRow>
                     <SimpleRow>
-                        <DateContainer description={'DATA DE INICIO'} date={start_date}/>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={redefineStartDate}
+                            customInput={<DateContainer description={'DATA DE INICIO'} date={start_date}/>}
+                        ></DatePicker>
                         {finish_date ? <DatePicker
                             selected={startDate}
                             onChange={defineDate}

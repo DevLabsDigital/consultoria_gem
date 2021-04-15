@@ -305,9 +305,9 @@ function* requestAddUser({payload}) {
     try {
         const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
         const boardId = extractIdFromPathname(pathname)
-        const {userIds, cardId} = payload
+        const {userIds, cardId, isMainUser} = payload
 
-        yield call(api.post, `${boardId}/add_user_to_card`, {id: cardId, user_ids: userIds})
+        yield call(api.post, `${boardId}/add_user_to_card`, {id: cardId, user_ids: userIds, is_main: isMainUser})
         yield put(closeAddUserModal())
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
     } catch (e) {

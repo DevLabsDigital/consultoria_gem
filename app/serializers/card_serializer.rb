@@ -8,7 +8,7 @@ class CardSerializer < ApplicationSerializer
   end  
 
   attribute :users do |object| 
-    JSON.parse(UserSerializer.new(object.users).serialized_json)
+    JSON.parse(UserSerializer.new(object.users.order("is_main desc")).serialized_json)
   end
 
   attribute :checklists do |object| 
