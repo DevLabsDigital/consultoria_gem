@@ -2,11 +2,14 @@ import React from 'react';
 import styled from "styled-components";
 import {Column, Row} from "../../../styles/Flex";
 
+const formattedData = (date)=>{
+    return new Date(Date.UTC(...date.split('-'))).toLocaleDateString()
+}
 const DateContainer = ({description, date, ...props}) => {
     return (
         <Container {...props}>
             <Description>{description}</Description>
-            <Content><i className="fa fa-calendar-alt" /> {date ? date : '12/12/2020'}</Content>
+            <Content><i className="fa fa-calendar-alt" /> {date ? formattedData(date) : '12/12/2020'}</Content>
         </Container>
     );
 };

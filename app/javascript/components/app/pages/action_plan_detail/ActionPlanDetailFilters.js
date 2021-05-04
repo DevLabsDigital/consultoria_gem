@@ -106,7 +106,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                         ))
                     }
                 </FiltrosCausaRazaoContainer>
-                <ClearFilter isExpanded={isExpanded} onClick={() => setTagsSelected([])}><i className="fa fa-trash-alt"/> limpar filtro</ClearFilter>
+                <ClearFilter isExpanded={isExpanded} onClick={() => setTagsSelected([])}><i className="fa fa-trash"/> limpar filtro</ClearFilter>
             </Padding>
             <DividerWithMargin/>
 
@@ -170,7 +170,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                 setTagsSelected([])
                 setUsersSelected([])
                 setText('')
-            }}><i className="fa fa-trash-alt"/> limpar todos os filtros</ClearFilter>
+            }}><i className="fa fa-trash"/> limpar todos os filtros</ClearFilter>
         </FilterContainer>
             <ModalAddUserFilter users={users} close={v => {
                 if(v != null) {

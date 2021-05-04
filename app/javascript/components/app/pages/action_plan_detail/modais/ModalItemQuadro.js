@@ -167,7 +167,7 @@ const ModalItemQuadro = (props) => {
                             }
                         })
                     }}>
-                        <i className="fa fa-trash-alt"/>
+                        <i className="fa fa-trash"/>
                     </IconContainer>
                     <IconContainer><i className="fa fa-ellipsis-v"/></IconContainer>
                 </ActionsHeader>

@@ -27,6 +27,10 @@ const ItemQuadro = ({value, listId, index, remove}) => {
         return  v.avatar
     }
 
+    const formattedData = (date)=>{
+        return new Date(Date.UTC(...date.split('-'))).toLocaleDateString()
+    }
+
     return (
         <Draggable draggableId={value.id} index={index}>
             {
@@ -60,7 +64,7 @@ const ItemQuadro = ({value, listId, index, remove}) => {
                                             }
                                         })
                                     }}>
-                                        <i className="fa fa-trash-alt"/>
+                                        <i className="fa fa-trash"/>
                                     </IconContainerStyled>
                                     <IconContainerStyled onClick={(e) => {
                                         e.preventDefault()
@@ -81,7 +85,7 @@ const ItemQuadro = ({value, listId, index, remove}) => {
                                     {value.finish_date ?
                                         <DateContainer prazoDecorrido={prazoDecorrido}>
                                             <i className="fa fa-calendar-alt"/>
-                                            25/07/2020
+                                            {formattedData(value.finish_date)}
                                         </DateContainer>
                                         : null
                                     }

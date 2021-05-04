@@ -96,7 +96,7 @@ const ActionPlanPage = () => {
                                         })
                                     }
                                     }
-                                ><i className="fa fa-trash-alt"/> excluir</DeleteBudget></>
+                                ><i className="fa fa-trash"/> excluir</DeleteBudget></>
                         }))
                     } columns={columns}/>
                 </Card>

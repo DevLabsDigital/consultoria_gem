@@ -42,7 +42,7 @@ const DashboardPage = () => {
             ...value, status: value.status === 'ok' ?
                 <OkBudget>{value.status}</OkBudget> : <PendingBudget>{value.status}</PendingBudget>,
             acoes: <><EditBudget><i className="fa fa-pen"/>editar</EditBudget><DeleteBudget><i
-                className="fa fa-trash-alt"/> excluir</DeleteBudget></>
+                className="fa fa-trash"/> excluir</DeleteBudget></>
         }))
         , []
     )
