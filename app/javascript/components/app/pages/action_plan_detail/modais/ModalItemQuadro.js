@@ -43,7 +43,7 @@ const ModalItemQuadro = (props) => {
 
     if (!cardValue || !cardValue.attributes) cardValue = {attributes: {checklists: [], tags: [], comments: [], users: []}}
 
-    const {title, description, checklists, tags, comments, users, start_date, finish_date, date_conclusion, id, list} = cardValue.attributes
+    const {title, description, checklists, tags, comments, users, start_date, created_at, finish_date, date_conclusion, id, list} = cardValue.attributes
 
     const closeModal = () => {
         if (modalChecklist.visible || modalTag.visible || modalUser.visible) return
@@ -107,7 +107,7 @@ const ModalItemQuadro = (props) => {
         <BaseModal isVisible={isVisible} top={10} width={'60rem'}
                    bodyStyle={{marginBottom: '10rem', transform: 'translateX(-50%)'}}
                    closeModal={closeModal}>
-            <ModalHeader>
+            <ModalHeader style={{marginBottom: 0}}>
                 <SimpleRow>
                     <SimpleRow>
                         <DatePicker
@@ -172,7 +172,20 @@ const ModalItemQuadro = (props) => {
                     <IconContainer><i className="fa fa-ellipsis-v"/></IconContainer>
                 </ActionsHeader>
             </ModalHeader>
+            <div style={{backgroundColor: statusDict[list?.status]?.color,
+                    color: "white",
+                    height: 21,
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: 8
+                
+                }}>
+                    {statusDict[list?.status]?.label}
+                </div>
             <Body>
+                
+                <div style={{textAlign: 'center', marginBottom: 16}}>{"Criado em: " + new Date(created_at).toLocaleDateString()}</div>
                 <SimpleRow style={{marginBottom: '.8rem', flexWrap: 'wrap',}}>
                     {
                         tags.map((tag, index) => (
@@ -232,6 +245,25 @@ const ModalItemQuadro = (props) => {
 };
 
 export default ModalItemQuadro;
+
+const statusDict = {
+    scheduled: {
+        label: "PREVISTO",
+        color: "#617E94"
+    },
+    delayed: {
+        label: "ATRASADO",
+        color: "#ED1C24"
+    },
+    in_progress: {
+        label: "EM ANDAMENTO",
+        color: "#0099D8"
+    },
+    completed: {
+        label: "CONCLUIDO",
+        color: "#009C53"
+    }
+}
 
 const ModalHeader = styled.div`
   padding: 2rem 4rem;
