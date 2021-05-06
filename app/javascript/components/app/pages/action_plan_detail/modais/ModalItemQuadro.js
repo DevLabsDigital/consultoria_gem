@@ -25,6 +25,7 @@ import Comment from "../components/Comment";
 import Checklist from "../components/Checklist";
 import CommentInput from "../../../components/CommentInput";
 import DateContainer from "../components/DateContainer";
+import TitleEditor from "../components/TitleEditor";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,6 +38,7 @@ const noUser = require('../../../assets/user.png')
 
 const ModalItemQuadro = (props) => {
     const [startDate, setStartDate] = useState(new Date());
+    const [editing, setEditing] = useState(false);
 
     let {visible: isVisible, cardValue, modalChecklist, modalTag, modalUser, newCommentInputValue} = useSelector(state => state.actionPlanDetail.item)
     const dispatch = useDispatch()
@@ -47,7 +49,7 @@ const ModalItemQuadro = (props) => {
 
     const closeModal = () => {
         if (modalChecklist.visible || modalTag.visible || modalUser.visible) return
-
+        
         if (isVisible) dispatch(closeItemModal())
     }
 
@@ -68,7 +70,19 @@ const ModalItemQuadro = (props) => {
 
     useEffect(() => {
         setDescriptionValue(description || "")
+        
     }, [cardValue])
+
+
+    const redefineTitle = (title) =>{
+        setEditing(false)
+        handleTitle(title)
+    }
+    const handleTitle = (title) => {
+      
+        dispatch(editDescription({cardId: cardValue.id, title: title}))
+        //setDescriptionValue('')
+    }
 
     const handleDescription = () => {
       
@@ -123,8 +137,15 @@ const ModalItemQuadro = (props) => {
                         {!finish_date ? <DatePicker
                             selected={startDate}
                             onChange={defineDate}
-                            customInput={<ButtonAddTag className={'fa fa-plus-circle'}
-                                                       style={{marginRight: '20px', marginLeft: '-5px'}}/>}
+                            customInput={
+                                <div>
+                                    
+                                    <ButtonAddTag style={{marginRight: '20px', marginLeft: '-5px', width: 90, padding: 9}}>
+                                        <div>Nova Data</div>
+                                        <i className={'fa fa-plus-circle'} style={{marginLeft: 10}}></i>
+                                    </ButtonAddTag>
+                                </div>
+                                                    }
                         /> : null}
                         {date_conclusion ? <DatePicker
                             selected={startDate}
@@ -198,7 +219,14 @@ const ModalItemQuadro = (props) => {
                         <ButtonAddTag style={{marginLeft: !tags.length ? '10px' : 0}} className={'fa fa-plus-circle'} onClick={() => dispatch(openAddTagModal())}/>
                     </SimpleRow>
                 </SimpleRow>
-                <Title>{title}</Title>
+                <Title>
+                    <TitleEditor
+                        title={title}
+                        editing={editing}
+                        setEditing={(value)=> setEditing(value)}
+                        redefineTitle={(value)=> redefineTitle(value)}
+                    ></TitleEditor>
+                </Title>
                 <div >
                 
                 <Description>

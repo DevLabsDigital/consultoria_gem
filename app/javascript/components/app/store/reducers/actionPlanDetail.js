@@ -400,11 +400,11 @@ function* requestDeleteComment({payload}) {
 
 function* requestEditDescription({payload}) {
     try {
-        const {description, cardId} = payload
+        const {title, description, cardId} = payload
         const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
         const boardId = extractIdFromPathname(pathname)
         
-        yield call(api.put, `${findListid(cardId, items)}/cards/${cardId}`, {description})
+        yield call(api.put, `${findListid(cardId, items)}/cards/${cardId}`, {description, title})
 
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
         yield put(loadActionPlanData(boardId))
