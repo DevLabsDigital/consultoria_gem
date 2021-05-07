@@ -101,7 +101,7 @@ border-bottom: .1rem solid #eaeaea;
 `
 
 const BottomButton = styled(SimpleRow).attrs(() => ({
-    children: <i className="fa fa-angle-double-left" />
+    children: <i className="fa fa-chevron-left" />
 }))`
 justify-content: center;
 width: 80%;

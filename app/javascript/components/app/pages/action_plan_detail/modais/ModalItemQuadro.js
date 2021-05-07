@@ -26,12 +26,14 @@ import Checklist from "../components/Checklist";
 import CommentInput from "../../../components/CommentInput";
 import DateContainer from "../components/DateContainer";
 import TitleEditor from "../components/TitleEditor";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import MySwal from "sweetalert2";
 import api from "../../../core/network";
 import {HOST_URL} from "../../../util/values_util";
+import ptBr from 'date-fns/locale/pt-BR';
+registerLocale('pt-BR', ptBr);
 
 const noUser = require('../../../assets/user.png')
 
@@ -51,6 +53,16 @@ const ModalItemQuadro = (props) => {
         if (modalChecklist.visible || modalTag.visible || modalUser.visible) return
         
         if (isVisible) dispatch(closeItemModal())
+    }
+
+    
+
+    const getFormattedDate = (date) =>{
+        if(eval(date)){
+            return new Date(Date.UTC(...eval(date)?.split('-'))) 
+        }else{
+            startDate
+        }
     }
 
 
@@ -125,16 +137,19 @@ const ModalItemQuadro = (props) => {
                 <SimpleRow>
                     <SimpleRow>
                         <DatePicker
-                            selected={startDate}
+                            locale={'pt-BR'}
+                            selected={getFormattedDate('start_date')}
                             onChange={redefineStartDate}
                             customInput={<DateContainer description={'DATA DE INICIO'} date={start_date}/>}
                         ></DatePicker>
                         {finish_date ? <DatePicker
-                            selected={startDate}
+                            locale={'pt-BR'}
+                            selected={getFormattedDate('finish_date')}
                             onChange={defineDate}
                             customInput={<DateContainer description={'DATA DE CONCLUSAO'} date={finish_date}/>}
                         /> : null}
                         {!finish_date ? <DatePicker
+                            locale={'pt-BR'}
                             selected={startDate}
                             onChange={defineDate}
                             customInput={
@@ -148,11 +163,13 @@ const ModalItemQuadro = (props) => {
                                                     }
                         /> : null}
                         {date_conclusion ? <DatePicker
-                            selected={startDate}
+                            locale={'pt-BR'}
+                            selected={getFormattedDate('date_conclusion')}
                             onChange={defineDateConclusion}
                             customInput={<DateContainer description={'2ª DATA DE CONCLUSAO'} date={date_conclusion}/>}
                         /> : null}
                         {!date_conclusion && finish_date ? <DatePicker
+                            locale={'pt-BR'}
                             selected={startDate}
                             onChange={defineDateConclusion}
                             customInput={<ButtonAddTag className={'fa fa-plus-circle'}

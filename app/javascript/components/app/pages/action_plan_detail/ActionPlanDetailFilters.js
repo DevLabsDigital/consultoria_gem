@@ -85,7 +85,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
             <Padding>
                 <Input placeholder={'Procure uma tarefa'} icon={'fa fa-search'} value={text} onChange={e => setText(e.target.value)}/>
                 <CollapsedButton onClick={toogleVisibility}><i
-                    className={`fas fa-angle-double-${isExpanded ? 'right' : 'left'}`}/></CollapsedButton>
+                    className={`fa fa-chevron-${isExpanded ? 'right' : 'left'}`}/></CollapsedButton>
             </Padding>
             <DividerWithMargin/>
 

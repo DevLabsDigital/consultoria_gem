@@ -52,7 +52,7 @@ border-color: ${({theme}) => theme.primaryColorLight};
 transition: all .3s;
 &::after {
 content: '\f00c';
-font-family: "Font Awesome 5 Free";
+font-family: "FontAwesome";
 font-weight: 900;
 display: inline-block;
 font-size: 1rem;
