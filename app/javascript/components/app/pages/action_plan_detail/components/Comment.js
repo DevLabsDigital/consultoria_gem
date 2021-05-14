@@ -22,7 +22,6 @@ const Comment = ({replies, ...props}) => {
         <CommentContainer {...props}>
                 {
                     replies && replies.map(reply => {
-                        debugger
                         return (
                             <CommentContainer key={reply.id} {...reply} isReply />
                                 )

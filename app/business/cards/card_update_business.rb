@@ -22,7 +22,6 @@ module Cards
       attr_reader :card_params
   
       def update_card!
-        debugger
         card.assign_attributes(card_params)
         if card.changes.any?
           create_card_history(card, user)
