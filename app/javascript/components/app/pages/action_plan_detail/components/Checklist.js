@@ -45,7 +45,7 @@ const Checklist = ({item, cardId}) => {
     return (
         <div key={item.id} style={{marginBottom: '2rem'}}>
             <SimpleRow spaceBetween style={{marginBottom: '2rem'}}>
-                <TitleSmall>{item.title}</TitleSmall>
+                <TitleSmall title={item.title}>{item.title}</TitleSmall>
                 <SimpleRow>
                     <BarraProgresso concluidoTotal={diferenca}/>
                     <QtdItens>{addZero(item.tasks.length)}</QtdItens>
@@ -56,7 +56,7 @@ const Checklist = ({item, cardId}) => {
             {
                 item.tasks.map(task => {
                     return (
-                        <CheckboxRow label={task.description} style={{marginBottom: '1rem'}} checked={!!task.completed} onChange={v => handleTaskStatus(v, task.id)}
+                        <CheckboxRow title={task.description} label={task.description} style={{marginBottom: '1rem'}} checked={!!task.completed} onChange={v => handleTaskStatus(v, task.id)}
                                      icon={<IconContainer hasBackground={false} onClick={() => handleRemoveTask(task.id)}><i
                                          className="fa fa-trash"/></IconContainer>}/>
                     )
@@ -72,6 +72,9 @@ export default Checklist;
 const TitleSmall = styled(Title)`
 font-size: 1.5rem;
 letter-spacing: 0.75px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 `
 
 const QtdItens = styled.div`

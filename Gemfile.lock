@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    consultoria (0.3.11)
+    consultoria (0.3.13)
       paper_trail (= 11.1.0)
       rails (~> 5.2.4.5, >= 5.2.4.5)
       react-rails (= 2.6.0)

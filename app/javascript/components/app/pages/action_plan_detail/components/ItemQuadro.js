@@ -145,6 +145,11 @@ const Content = styled.span`
                 letter-spacing: 0.75px;
                 color: ${({theme}) => theme.darkColor};
                 margin-top: .6rem;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+                max-height: 93px;
                 `
 
 const Footer = styled(SimpleRow)`

@@ -7,7 +7,13 @@ module Cards
 
     def initialize(params, user)
       @moved_card = Consultoria::Card.find_by(id: params[:id].to_i)
-      @consultoria_list_id = params[:consultoria_list_id].to_i
+      if params[:list_label]
+        @list = @moved_card.list.board.lists.where(status: Consultoria::List.statuses[params[:list_label].downcase]).first
+        @consultoria_list_id = @list.id
+      else
+        @consultoria_list_id = params[:consultoria_list_id].to_i
+      end
+      
       @position = params[:position].to_i
     end
 

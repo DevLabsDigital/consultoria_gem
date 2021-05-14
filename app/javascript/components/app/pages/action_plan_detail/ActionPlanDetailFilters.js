@@ -110,21 +110,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
             </Padding>
             <DividerWithMargin/>
 
-            <Padding>
-                <Labels>FILTRE POR STATUS</Labels>
-                <MarginChildren>
-                    <CheckboxRow label={'Previsto'} checked={status.scheduled}
-                                 onChange={value => dispatch(handleFilterCheck({field: 'scheduled', value}))}/>
-                    <CheckboxRow label={'Em andamento'} checked={status.in_progress}
-                                 onChange={value => dispatch(handleFilterCheck({field: 'in_progress', value}))}/>
-                    <CheckboxRow label={'Atrasado'} checked={status.delayed}
-                                 onChange={value => dispatch(handleFilterCheck({field: 'delayed', value}))}/>
-                    <CheckboxRow label={'Concluído'} checked={status.completed}
-                                 onChange={value => dispatch(handleFilterCheck({field: 'completed', value}))}/>
-                </MarginChildren>
-            </Padding>
-            <DividerWithMargin/>
-
+            
             <Padding>
                 <Labels>RESPONSÁVEL</Labels>
                 <MarginChildren>
@@ -145,7 +131,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                             }
                         }) : (
                                 <UserRowPlusButton>
-                                    <UserRow noImage={true} name={'Adicionar usuario'} />
+                                    <UserRow noImage={true} name={'Filtrar usuario'} />
                                     <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fa fa-plus-circle"/></PlusButton>
                                 </UserRowPlusButton>
                             )
@@ -153,6 +139,21 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
 
                 </MarginChildren>
             </Padding>
+            <DividerWithMargin/>
+            <Padding>
+                <Labels>FILTRE POR STATUS</Labels>
+                <MarginChildren>
+                    <CheckboxRow label={'Previsto'} checked={status.scheduled}
+                                 onChange={value => dispatch(handleFilterCheck({field: 'scheduled', value}))}/>
+                    <CheckboxRow label={'Em andamento'} checked={status.in_progress}
+                                 onChange={value => dispatch(handleFilterCheck({field: 'in_progress', value}))}/>
+                    <CheckboxRow label={'Atrasado'} checked={status.delayed}
+                                 onChange={value => dispatch(handleFilterCheck({field: 'delayed', value}))}/>
+                    <CheckboxRow label={'Concluído'} checked={status.completed}
+                                 onChange={value => dispatch(handleFilterCheck({field: 'completed', value}))}/>
+                </MarginChildren>
+            </Padding>
+            
             <DividerWithMargin/>
 
 

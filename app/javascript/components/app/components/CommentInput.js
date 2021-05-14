@@ -78,6 +78,7 @@ padding: 1.4rem;
 border-radius: .5rem;
 outline: none;
 border: none;
+resize: vertical;
 word-wrap: anywhere;
 
 &::placeholder {

@@ -218,6 +218,7 @@ function* requestChangeCardPosition({payload}) {
     try {
         const {data, idToRefresh: boardId} = payload
         yield call(api.put, 'cards/move_to_list', data)
+        
         yield put(loadActionPlanData(boardId))
     } catch (e) {
         genericError()

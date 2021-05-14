@@ -9,11 +9,13 @@ import Title from "../../../components/Title";
 import {TextNormal} from "../../../styles/Typography";
 import Divider from "../../../components/Divider";
 import SimpleRow from "../../../components/SimpleRow";
+import {loadActionPlanData} from "../../../store/reducers/actionPlanDetail";
 import {
     changeNewCommentValue,
     closeItemModal,
     deleteCardActionPlan,
     deleteTag,
+    changeActionPlanCardPosition,
     editDescription,
     handleNewCommentRequest,
     handleOpenCardActionPlan,
@@ -59,7 +61,8 @@ const ModalItemQuadro = (props) => {
 
     const getFormattedDate = (date) =>{
         if(eval(date)){
-            return new Date(Date.UTC(...eval(date)?.split('-'))) 
+            let [year, month, day] = eval(date)?.split('-')
+            return new Date(Date.UTC(year, month -1, day -1)) 
         }else{
             startDate
         }
@@ -82,6 +85,10 @@ const ModalItemQuadro = (props) => {
 
     useEffect(() => {
         setDescriptionValue(description || "")
+        if(list){
+            console.log(list.consultoria_board_id)
+            //dispatch(loadActionPlanData(list.consultoria_board_id))
+        }
         
     }, [cardValue])
 
@@ -104,24 +111,33 @@ const ModalItemQuadro = (props) => {
 
     const defineDate = async (date) => {
             await api.put(`/${list.id}/cards/${id}`, {
-                finish_date: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+                finish_date: date.toLocaleDateString()
             })
         dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
     }
 
     const redefineStartDate = async (date) => {
         await api.put(`/${list.id}/cards/${id}`, {
-            start_date: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+            start_date: date.toLocaleDateString()
         })
-    dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
-}
+        dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
+    }
 
     const defineDateConclusion = async (date) => {
             await api.put(`/${list.id}/cards/${id}`, {
-                date_conclusion: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+                date_conclusion: date.toLocaleDateString()
             })
         dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
     }
+
+    const changePosition = async(event) =>{
+        dispatch(changeActionPlanCardPosition({
+            data: {id, list_label: event.target.value},
+            idToRefresh: list.consultoria_board_id
+        }))
+       
+    }
+    
 
     const getImage = v => {
         if(v == undefined || v == null) return undefined
@@ -156,7 +172,7 @@ const ModalItemQuadro = (props) => {
                                 <div>
                                     
                                     <ButtonAddTag style={{marginRight: '20px', marginLeft: '-5px', width: 90, padding: 9}}>
-                                        <div>Nova Data</div>
+                                        <div>Data Conclusão</div>
                                         <i className={'fa fa-plus-circle'} style={{marginLeft: 10}}></i>
                                     </ButtonAddTag>
                                 </div>
@@ -172,8 +188,10 @@ const ModalItemQuadro = (props) => {
                             locale={'pt-BR'}
                             selected={startDate}
                             onChange={defineDateConclusion}
-                            customInput={<ButtonAddTag className={'fa fa-plus-circle'}
-                                                       style={{marginRight: '20px', marginLeft: '-5px'}}/>}
+                            customInput={<ButtonAddTag style={{marginRight: '20px', marginLeft: '-5px', width: 90, padding: 9}}>
+                            <div>Nova Data</div>
+                            <i className={'fa fa-plus-circle'} style={{marginLeft: 10}}></i>
+                        </ButtonAddTag>}
                         /> : null}
 
                     </SimpleRow>
@@ -219,7 +237,13 @@ const ModalItemQuadro = (props) => {
                     marginBottom: 8
                 
                 }}>
-                    {statusDict[list?.status]?.label}
+                    
+                    <SelectCustom id={'select-status'} onChange={changePosition}>
+                        {Object.entries(statusDict).map(([key, values])=>{
+                            return <CustomOption value={key} selected={key == list?.status}>{values.label}</CustomOption>
+                        })}
+                        
+                    </SelectCustom>
                 </div>
             <Body>
                 
@@ -325,7 +349,15 @@ const ActionsHeader = styled.div`
     margin-right: 1rem;
   }
 `
-
+const CustomOption = styled.option`
+  color: black;
+`
+const SelectCustom = styled.select`
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    color: white;
+`
 const Body = styled.div`
   padding: 0 4rem 5.6rem;
   ${Column};

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import {Column, Row} from "../../../styles/Flex";
 
 const formattedData = (date)=>{
-    return new Date(Date.UTC(...date.split('-'))).toLocaleDateString()
+    let  [year, month, day] = date.split("-")
+    return `${day}/${month}/${year}`
 }
 const DateContainer = ({description, date, ...props}) => {
     return (

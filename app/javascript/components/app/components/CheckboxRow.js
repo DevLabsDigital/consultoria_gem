@@ -9,7 +9,7 @@ const CheckboxRow = ({label, icon, style, ...props}) => {
         <CheckboxRowContainer style={style}>
                 <Checkbox {...props}/>
             <SimpleRow spaceBetween style={{width: '100%'}}>
-                <span>{label}</span>
+                <LimitedSpan>{label}</LimitedSpan>
                 {icon}
             </SimpleRow>
         </CheckboxRowContainer>
@@ -18,6 +18,12 @@ const CheckboxRow = ({label, icon, style, ...props}) => {
 
 export default CheckboxRow;
 
+const LimitedSpan = styled.span`
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 90%;
+`
 const CheckboxRowContainer = styled(SimpleRow)`
 padding: 0 1rem;
 ${TextNormal};

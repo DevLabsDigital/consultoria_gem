@@ -19,5 +19,8 @@ const SimpleRow = ({spaceBetween, end, center, children, ...props}) => {
 export default SimpleRow;
 
 const SimpleRowStyled = styled.div`
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 ${Row};
 `

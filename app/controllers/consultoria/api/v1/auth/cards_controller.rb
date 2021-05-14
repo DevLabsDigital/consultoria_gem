@@ -73,7 +73,7 @@ module Api
         private
 
         def card_params
-          params.permit(:consultoria_list_id, :id, :title, :description, :start_date, :finish_date, :position, :date_conclusion, :lead_id, user_ids: [])
+          params.permit(:consultoria_list_id, :id, :title, :status, :description, :start_date, :finish_date, :position, :date_conclusion, :lead_id, user_ids: [])
         end
 
         def serializer_resource(card)
