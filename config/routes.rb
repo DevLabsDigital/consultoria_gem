@@ -35,6 +35,7 @@ Consultoria::Engine.routes.draw do
 	        put ':consultoria_card_id/comments/:id', to: 'comments#update'
 	        post ':consultoria_card_id/comments/:id/replies', to: 'comments#replies'
 	        post ':consultoria_card_id/checklists', to: 'checklists#create'
+			put ':consultoria_card_id/checklists/:id', to: 'checklists#update'
 	        post ':consultoria_checklist_id/tasks', to: 'tasks#create'
 	        put ':consultoria_checklist_id/tasks/:id', to: 'tasks#update'
 

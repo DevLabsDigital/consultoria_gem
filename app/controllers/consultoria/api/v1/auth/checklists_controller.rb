@@ -11,6 +11,14 @@ module Api
           render json: serializer_resource(check), status: :created
         end
 
+        def update
+          check = Checklist.find(params[:id])
+          check.update(checklist_params)
+          text = "O usuário #{current_user.name} alterou o checklist #{check.title}"
+          CardHistoryService::CardHistoryCreate.new(check.card, current_user, text, "checklist").call
+          render json: serializer_resource(check), status: :created
+        end
+
         def destroy
           checklist.destroy!
           head :no_content

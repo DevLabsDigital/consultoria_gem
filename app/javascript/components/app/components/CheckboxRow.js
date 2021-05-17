@@ -1,15 +1,31 @@
-import React from 'react';
+import React,{useState} from 'react';
 import SimpleRow from "./SimpleRow";
 import styled from "styled-components";
 import Checkbox from "./Checkbox";
 import {TextNormal} from "../styles/Typography";
+import EditableTitle from '../pages/action_plan_detail/components/EditableTitle'
+const CheckboxRow = ({label, icon, style, onChangeTitle, ...props}) => {
+    const [editingTitle, setEditingTitle] = useState(false);
 
-const CheckboxRow = ({label, icon, style, ...props}) => {
+    const redefineTitle = (title) =>{
+        setEditingTitle(false)
+        onChangeTitle(title)
+    }
+
+
+
     return (
         <CheckboxRowContainer style={style}>
                 <Checkbox {...props}/>
             <SimpleRow spaceBetween style={{width: '100%'}}>
-                <LimitedSpan>{label}</LimitedSpan>
+                
+                <EditableTitle
+                CustomTitle={LimitedSpan}
+                editing={editingTitle}
+                setEditing={(value)=> setEditingTitle(value)}
+                redefineTitle={(value)=> redefineTitle(value)}
+                title={label}
+                >{label}</EditableTitle>
                 {icon}
             </SimpleRow>
         </CheckboxRowContainer>

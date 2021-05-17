@@ -9,6 +9,7 @@ module Cards
     def initialize(card_params, user)
       @card = Consultoria::Card.find card_params[:id]
       @users = Consultoria::User.where("id IN (?)", card_params[:user_ids])
+      debugger
       @is_main = card_params[:is_main]
       @current_user = user
     end

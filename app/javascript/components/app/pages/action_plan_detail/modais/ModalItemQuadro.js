@@ -9,6 +9,7 @@ import Title from "../../../components/Title";
 import {TextNormal} from "../../../styles/Typography";
 import Divider from "../../../components/Divider";
 import SimpleRow from "../../../components/SimpleRow";
+
 import {loadActionPlanData} from "../../../store/reducers/actionPlanDetail";
 import {
     changeNewCommentValue,
@@ -43,13 +44,13 @@ const noUser = require('../../../assets/user.png')
 const ModalItemQuadro = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [editing, setEditing] = useState(false);
-
+    const [showMostThanThreeHistorics, setShowMostThanThreeHistorics] = useState(false);
     let {visible: isVisible, cardValue, modalChecklist, modalTag, modalUser, newCommentInputValue} = useSelector(state => state.actionPlanDetail.item)
     const dispatch = useDispatch()
 
     if (!cardValue || !cardValue.attributes) cardValue = {attributes: {checklists: [], tags: [], comments: [], users: []}}
 
-    const {title, description, checklists, tags, comments, users, start_date, created_at, finish_date, date_conclusion, id, list} = cardValue.attributes
+    const {title, description, checklists, tags, comments, users, start_date, created_at, finish_date, date_conclusion, id, list, card_histories} = cardValue.attributes
 
     const closeModal = () => {
         if (modalChecklist.visible || modalTag.visible || modalUser.visible) return
@@ -279,6 +280,23 @@ const ModalItemQuadro = (props) => {
                 </div>
                 <DividedStyled/>
                 <SimpleRow spaceBetween style={{marginBottom: '2rem'}}>
+                    <Subtitle>HISTÓRICO DE EDIÇÃO</Subtitle>
+                </SimpleRow>
+                    <div>
+                        {card_histories?.data?.map((card_history, i)=>{
+                            let {attributes} = card_history
+
+                            return (showMostThanThreeHistorics || i < 3) && <HistoricRow><UserAvatar src={attributes?.user?.avatar}/>{attributes.alteration}</HistoricRow>
+                        })}
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                            <IconContainer  onClick={() => setShowMostThanThreeHistorics(!showMostThanThreeHistorics)}>
+                            <i className={`fa fa-chevron-${showMostThanThreeHistorics ? "up" : "down"}`}/></IconContainer>
+                        </div>
+                        
+                    </div>
+                
+                <DividedStyled/>
+                <SimpleRow spaceBetween style={{marginBottom: '2rem'}}>
                     <Subtitle>CHECKLIST DE ATIVIDADES</Subtitle>
                     <SimpleRow>
                     {!checklists.length ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Checklist</span> : null}
@@ -362,6 +380,14 @@ const Body = styled.div`
   padding: 0 4rem 5.6rem;
   ${Column};
 `
+const UserAvatar = styled.img`
+border-radius: 50%;
+width: 2.03rem;
+height: 2.03rem;
+margin-bottom: .2rem;
+margin-right: 1rem;
+overflow: hidden;
+`
 
 const Subtitle = styled.span`
   ${TextNormal};
@@ -427,6 +453,17 @@ const TagCloseIcon = styled.div.attrs(() => ({
   justify-content: center;
   opacity: 0;
   transition: all .3s;
+`
+
+const HistoricRow = styled.div`
+    margin: 4px 0 3.5px 16.5px;
+    font-size: 15px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.75px;
+    color: #2a3170;
 `
 
 const Tag = styled.div`

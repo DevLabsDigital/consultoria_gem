@@ -28,6 +28,23 @@ module Api
         def move_to_list
           business = Cards::CardMoveToListBusiness.new(params, current_user)
           business.move_card!
+          statusDict = {
+            scheduled: {
+                label: "PREVISTO"
+            },
+            delayed: {
+                label: "ATRASADO"
+            },
+            in_progress: {
+                label: "EM ANDAMENTO"
+            },
+            completed: {
+                label: "CONCLUIDO"
+            }
+          }
+          
+          text = "O usuário #{current_user.name} colocou o card na lista #{statusDict[business.moved_card.list.status.to_sym][:label]}"
+          CardHistoryService::CardHistoryCreate.new(business.moved_card, current_user, text, "list").call
           render json: serializer_resource(business.moved_card), status: :ok
         end
 

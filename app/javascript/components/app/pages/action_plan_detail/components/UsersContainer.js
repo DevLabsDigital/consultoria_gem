@@ -7,15 +7,24 @@ import {Row} from "../../../styles/Flex";
 const UsersContainer = ({img1, img2, img3}) => {
 
     const {cardValue} = useSelector(state => state.actionPlanDetail.item)
-
+    let plusButtonMarginLeft = -20
+    if(img1){
+        plusButtonMarginLeft = 27
+    }
+    if(img2){
+        plusButtonMarginLeft = 40
+    }
+    if(img3){
+        plusButtonMarginLeft = 50
+    }
     const dispatch = useDispatch()
     return (
         <ImagesContainer>
             {img1 ? <UserImg index={0} isBig src={img1}/> : null}
             {img2 ? <UserImg index={1} src={img2}/> : null}
             {img3 ? <UserImg index={2} src={img3}/> : null}
-                {cardValue && !img1 ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Usuario</span> : null}
-                    {cardValue ? <ButtonAddUser style={{marginLeft: !img1 ? '40px' : 0}} className={'fa fa-plus-circle'} onClick={(e) => {
+                {cardValue && !img1 ? <span  style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Usuario</span> : null}
+                    {cardValue ? <ButtonAddUser plusButtonMarginLeft={plusButtonMarginLeft} className={'fa fa-plus-circle'} onClick={(e) => {
                 e.stopPropagation()
                 dispatch(openAddUserModal(cardValue))
                 }} index={!img1? 0 : img1 && !img2 ? 1.5 : img3 ? 3 : 2}/> : null}
@@ -64,9 +73,7 @@ background-color: #eaeaea;
 cursor: pointer;
 margin-bottom: .5rem;
 border-radius: 50%;
-    position: absolute;
-    top: 50%; 
-    left: ${({index}) => index * 1.8 + 'rem'};
-    z-index: index + 20 - (index * 10);
-    transform: translateY(-50%); 
+margin-left: ${({plusButtonMarginLeft}) => plusButtonMarginLeft}px;
+
+
 `

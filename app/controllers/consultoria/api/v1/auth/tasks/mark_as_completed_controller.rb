@@ -6,7 +6,7 @@ module Api
         class MarkAsCompletedController < AuthController
           def update
             task.update(completed: params[:completed])
-            text = "O usuário #{current_user.name} marcou a tarefa #{task.description} como completa"
+            text = "O usuário #{current_user.name} #{params[:completed] ? "marcou" : "desmarcou" } #{task.description} como completa"
             CardHistoryService::CardHistoryCreate.new(task.checklist.card, current_user, text, "task").call
             render json: serializer_resource, status: :created
           end

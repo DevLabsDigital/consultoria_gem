@@ -13,6 +13,7 @@ export const createNewCardActionPlan = createAction('actionPlanDetail/createNewC
 export const deleteCardActionPlan = createAction('actionPlanDetail/deleteCardActionPlan')
 export const handleOpenCardActionPlan = createAction('actionPlanDetail/handleOpenCardActionPlan')
 export const handleAddNewCheckList = createAction('actionPlanDetail/handleAddNewCheckList')
+export const handleUpdateCheckList = createAction('actionPlanDetail/handleUpdateCheckList')
 export const handleDeleteCheckList = createAction('actionPlanDetail/handleDeleteCheckList')
 export const handleAddTag = createAction('actionPlanDetail/handleAddTag')
 export const fetchTags = createAction('actionPlanDetail/fetchTags')
@@ -129,6 +130,7 @@ const actionPlanDetailSlice = createSlice({
         createTask(state, action) {},
         deleteTask(state, action) {},
         changeTask(state, action) {},
+        updateTask(state, action) {},
         copyCard(state, action) {},
         handleFilterCheck(state, action) {
             const {field, value} = action.payload
@@ -160,6 +162,7 @@ export const {
     createTask,
     deleteTask,
     changeTask,
+    updateTask,
     openCopyCardModal,
     closeCopyCardModal,
     copyCard,
@@ -277,6 +280,20 @@ function* requestAddNewCheckList({payload}) {
         console.log(e)
     }
 }
+function* requestUpdateCheckList({payload}) {
+    try {
+        const {title, cardId, id} = payload
+        const {items} = yield select(state => state.actionPlanDetail)
+
+        yield call(api.put, `${cardId}/checklists/${id}`, {title})
+
+        yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+    } catch (e) {
+        genericError()
+        console.log(e)
+    }
+}
+
 function* requestTags({payload}){
     const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
     const boardId = extractIdFromPathname(pathname)
@@ -449,8 +466,22 @@ function* requestDeleteTask({payload}) {
     try {
         const {cheklistId, id, cardId} = payload
         const [items] = yield select(state => [state.actionPlanDetail.items])
-
+        
         yield call(api.delete, `${cheklistId}/tasks`, {data: {checklist_id: id}})
+
+        yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+    } catch (e) {
+        genericError()
+        console.log(e)
+    }
+}
+
+function* updateInnerTask({payload}) {
+    try {
+        const {cheklistId, description, id, cardId} = payload
+        const [items] = yield select(state => [state.actionPlanDetail.items])
+        
+        yield call(api.put, `${cheklistId}/tasks/${id}`, {description})
 
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
     } catch (e) {
@@ -482,6 +513,7 @@ export function* actionPlanDetailSaga() {
         takeEvery(deleteCardActionPlan.type, requestDeleteCardActionPlan),
         takeEvery(handleOpenCardActionPlan.type, requestDetailCardActionPlan),
         takeEvery(handleAddNewCheckList.type, requestAddNewCheckList),
+        takeEvery(handleUpdateCheckList.type, requestUpdateCheckList),
         takeEvery(handleAddTag.type, requestAddTag),
         takeEvery(fetchTags.type, requestTags),
         takeEvery(handleAddUser.type, requestAddUser),
@@ -495,6 +527,7 @@ export function* actionPlanDetailSaga() {
         takeEvery(createTask.type, requestCreateTask),
         takeEvery(deleteTask.type, requestDeleteTask),
         takeEvery(changeTask.type, requestChangeTaskStatus),
+        takeEvery(updateTask.type, updateInnerTask),
         takeEvery(copyCard.type, requestCopyCard),
     ])
 }
