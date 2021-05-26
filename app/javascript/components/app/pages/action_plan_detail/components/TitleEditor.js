@@ -5,7 +5,7 @@ const TitleEditor = ({title, editing, setEditing, redefineTitle}) => {
     const [internalTitle, setInternalTitle] = useState(title);
     return (
         <React.Fragment>
-                <form style={{display: editing ? "block" : "none"}} action={'javascript:void(0)'} onSubmit={()=> redefineTitle(internalTitle)}>
+                <form style={{width: "100%", display: editing ? "flex" : "none"}} action={'javascript:void(0)'} onSubmit={()=> redefineTitle(internalTitle)}>
                     <input
                         onChange={(e) => setInternalTitle(e.target.value)}
                         style={{
@@ -16,7 +16,8 @@ const TitleEditor = ({title, editing, setEditing, redefineTitle}) => {
                             lineHeight: "normal",
                             letterSpacing: ".1rem",
                             color: "#2a3170",
-                            border: "none"
+                            border: "none",
+                            width: "100%"
                     }}
                     value={internalTitle || title}></input>
                 </form>

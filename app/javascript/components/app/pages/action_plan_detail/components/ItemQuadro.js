@@ -19,16 +19,17 @@ const ItemQuadro = ({value, listId, index, remove}) => {
 
     const dispatch = useDispatch()
 
-    const {title, description, prazoDecorrido, users, images, tags} = value
-
+    const {title, description, prazoDecorrido, users, images, tags, finish_date} = value
+    
     const getImage = v => {
         if(v == undefined || v == null) return undefined
         if(!v.avatar) return noUser
         return  v.avatar
     }
-
+   
     const formattedData = (date)=>{
-        return new Date(Date.UTC(...date.split('-'))).toLocaleDateString()
+        let [year, month, day] = date?.split('-')
+        return new Date(Date.UTC(year, month, day + 1)).toLocaleDateString()
     }
 
     return (
@@ -82,10 +83,10 @@ const ItemQuadro = ({value, listId, index, remove}) => {
                                     <IconAndLabel><i
                                         className="fa fa-comment-dots"/> {addZero(value.comments?.length || 0)}
                                     </IconAndLabel>
-                                    {value.finish_date ?
+                                    {finish_date ?
                                         <DateContainer prazoDecorrido={prazoDecorrido}>
                                             <i className="fa fa-calendar-alt"/>
-                                            {formattedData(value.finish_date)}
+                                            {formattedData(finish_date)}
                                         </DateContainer>
                                         : null
                                     }

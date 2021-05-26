@@ -12,13 +12,14 @@ const EditableTitle = ({title, editing, setEditing, CustomTitle=<div></div>, red
     }
     return (
         <React.Fragment>
-                <form style={{display: editing ? "block" : "none"}} action={'javascript:void(0)'} onSubmit={()=> redefineTitle(internalTitle)}>
+                <form style={{width: '100%', display: editing ? "block" : "none"}} action={'javascript:void(0)'} onSubmit={()=> redefineTitle(internalTitle)}>
                     <input
                         onChange={(e) => setInternalTitle(e.target.value)}
                         tabIndex="0"
                         ref={ref => ref && editing && ref.focus()}
                         onBlur={()=>setEditing(false)}
                         style={{
+                            width: '100%',
                             ...inputStyle
                     }}
                     value={internalTitle || title}></input>

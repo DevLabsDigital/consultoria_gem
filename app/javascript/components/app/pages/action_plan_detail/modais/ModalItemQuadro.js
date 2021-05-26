@@ -115,6 +115,7 @@ const ModalItemQuadro = (props) => {
                 finish_date: date.toLocaleDateString()
             })
         dispatch(handleOpenCardActionPlan({listId: list.id, cardId: id}))
+        handleDescription()
     }
 
     const redefineStartDate = async (date) => {
@@ -226,7 +227,7 @@ const ModalItemQuadro = (props) => {
                     }}>
                         <i className="fa fa-trash"/>
                     </IconContainer>
-                    <IconContainer><i className="fa fa-ellipsis-v"/></IconContainer>
+                    {/* <IconContainer><i className="fa fa-ellipsis-v"/></IconContainer> */}
                 </ActionsHeader>
             </ModalHeader>
             <div style={{backgroundColor: statusDict[list?.status]?.color,
@@ -278,22 +279,7 @@ const ModalItemQuadro = (props) => {
                                   confirm={handleDescription}/>
                 </Description>
                 </div>
-                <DividedStyled/>
-                <SimpleRow spaceBetween style={{marginBottom: '2rem'}}>
-                    <Subtitle>HISTÓRICO DE EDIÇÃO</Subtitle>
-                </SimpleRow>
-                    <div>
-                        {card_histories?.data?.map((card_history, i)=>{
-                            let {attributes} = card_history
-
-                            return (showMostThanThreeHistorics || i < 3) && <HistoricRow><UserAvatar src={attributes?.user?.avatar}/>{attributes.alteration}</HistoricRow>
-                        })}
-                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
-                            <IconContainer  onClick={() => setShowMostThanThreeHistorics(!showMostThanThreeHistorics)}>
-                            <i className={`fa fa-chevron-${showMostThanThreeHistorics ? "up" : "down"}`}/></IconContainer>
-                        </div>
-                        
-                    </div>
+                
                 
                 <DividedStyled/>
                 <SimpleRow spaceBetween style={{marginBottom: '2rem'}}>
@@ -326,6 +312,22 @@ const ModalItemQuadro = (props) => {
                         )
                     })
                 }
+                <DividedStyled/>
+                <SimpleRow spaceBetween style={{marginBottom: '2rem'}}>
+                    <Subtitle>HISTÓRICO DE EDIÇÃO</Subtitle>
+                </SimpleRow>
+                <div>
+                    {card_histories?.data?.map((card_history, i)=>{
+                        let {attributes} = card_history
+
+                        return (showMostThanThreeHistorics || i < 3) && <HistoricRow><UserAvatar src={attributes?.user?.avatar}/>{attributes.alteration}</HistoricRow>
+                    })}
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                        <IconContainer  onClick={() => setShowMostThanThreeHistorics(!showMostThanThreeHistorics)}>
+                        <i className={`fa fa-chevron-${showMostThanThreeHistorics ? "up" : "down"}`}/></IconContainer>
+                    </div>
+                    
+                </div>
             </Body>
         </BaseModal>
     );
