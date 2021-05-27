@@ -29,7 +29,8 @@ const ItemQuadro = ({value, listId, index, remove}) => {
    
     const formattedData = (date)=>{
         let [year, month, day] = date?.split('-')
-        return new Date(Date.UTC(year, month, day + 1)).toLocaleDateString()
+        
+        return new Date(Date.parse(`${month}/${day}/${year}`)).toLocaleDateString()
     }
 
     return (
