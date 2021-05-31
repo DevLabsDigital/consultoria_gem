@@ -5,8 +5,10 @@ import {DragDropContext} from "react-beautiful-dnd";
 import styled from "styled-components";
 import Quadro from "./components/Quadro";
 import ItemQuadro from "./components/ItemQuadro";
+import ItemLista from "./components/ItemLista";
 import ActionPlanDetailFilters from "./ActionPlanDetailFilters";
 import {useParams} from "react-router";
+import {TipoFiltroFechamentoDoResultado} from "../../components/TiposCausaRazao";
 import {useDispatch, useSelector} from "react-redux";
 import {
     changeActionPlanCardPosition,
@@ -21,14 +23,16 @@ const ActionPlanDetailPage = () => {
 
     const params = useParams()
     const dispatch = useDispatch()
-    
+    const [layout, setLayout] = useState("card")
     const {items, filters, board} = useSelector(state => state.actionPlanDetail)
     const {currentBoard, setCurrentBoard} = useState({})
     const [renderedItens, setRenderedItens] = useState({})
+    const {tags} = useSelector(state => state.actionPlanDetail)
 
     useEffect(() => {
         dispatch(loadrequestBoard({id: params.id}))
         dispatch(loadActionPlanData(params.id))
+        
         console.log(board)
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params])
@@ -107,8 +111,29 @@ const ActionPlanDetailPage = () => {
         dispatch(deleteCardActionPlan({listId, cardId, boardId: params.id}))
     }
 
+    const renderList = ()=>{
+        console.log("RENDERED", renderedItens)
+        return <WhiteBoard>
+            {tags.map((tag)=>{
+                return <React.Fragment>
+                    <TipoFiltroFechamentoDoResultado label={tag.attributes.name}/>
+                    {Object.values(renderedItens?.columns)?.map((item, index) => {
+                        const value = item
+                        let includeTag = value.tags.map((x)=> String(x.id)).includes(String(tag.id))
+                        return (
+                             includeTag && <ItemLista key={value.id} index={index} value={value}
+                                        listId={renderedItens.scheduled.id} remove={deleteCard}/>
+                        )
+                    })}
+                </React.Fragment>
+            })}
+             
+        </WhiteBoard>
+    }
+
     useEffect(() => {
         let newItems = {...items}
+        
         if(Object.values(filters.status).some(v => v)) {
 
             if(!filters.status.scheduled && newItems.scheduled) {
@@ -139,9 +164,16 @@ const ActionPlanDetailPage = () => {
                 <SubTopbar>
                     <Title>{board?.data?.attributes?.title}</Title>
                     {/*<GreenButton><i className="fa fa-plus-circle"/>Adicionar ATA</GreenButton>*/}
+                    <div style={{width: 100, display: 'flex'}}>
+                        <a href={'javascript::void(0)'} style={{margin: 10}} onClick={()=> setLayout("card")}>Cards</a>
+                        <a href={'javascript::void(0)'} style={{margin: 10}} onClick={()=> setLayout("list")}>Listas</a>
+                    </div>
+                    
+                    
                 </SubTopbar>
+                
                 {
-                    hasValue(renderedItens) ? <DragDropContext onDragEnd={onDragEnd}>
+                    (hasValue(renderedItens) && layout == "card") ? <DragDropContext onDragEnd={onDragEnd}>
                             <QuadrosContainer>
                                 <Quadro black percentual={percentualPrevisto} headerTitle={'PREVISTO'}
                                         headerQtdLabel={addZero(renderedItens?.scheduled?.ids?.length)}
@@ -199,6 +231,7 @@ const ActionPlanDetailPage = () => {
                         </DragDropContext>
                         : null
                 }
+                {layout == "list" && renderList()}
             </MainContainer>
             <FilterContainer isExpanded={isFilterExpanded}>
                 <ActionPlanDetailFilters isExpanded={isFilterExpanded}
@@ -232,4 +265,13 @@ grid-column-gap: 1.5rem;
 const FilterContainer = styled.div`
 width: ${({isExpanded}) => isExpanded ? '35rem' : '1rem'};
 transition: all .3s;
+`
+
+const WhiteBoard = styled.div`
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: .5rem;
+    box-shadow: 0.2rem 0.2rem 1rem 0 rgb(0 0 0 / 10%);
+    border: solid 0.5px #e5e5e5;
+    margin: 16px;
 `
