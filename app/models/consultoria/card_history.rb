@@ -7,7 +7,7 @@ module Consultoria
 
 	  def send_mail_to_users
 		card.users.each do |user|
-			UserMailer.with(user: user, alteration: self.alteration, card: self.card).card_changed.deliver_later
+			UserMailer.with(user: user, alteration: self.alteration, card: self.card).card_changed.deliver_now
 		end
 	  end
 	end
