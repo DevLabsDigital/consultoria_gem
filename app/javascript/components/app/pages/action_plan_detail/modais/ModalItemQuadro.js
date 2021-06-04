@@ -264,6 +264,7 @@ const ModalItemQuadro = (props) => {
                 </SimpleRow>
                 <Title>
                     <TitleEditor
+                        key={title}
                         title={title}
                         editing={editing}
                         setEditing={(value)=> setEditing(value)}

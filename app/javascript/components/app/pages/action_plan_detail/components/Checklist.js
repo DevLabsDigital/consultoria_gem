@@ -94,9 +94,8 @@ export default Checklist;
 const TitleSmall = styled(Title)`
 font-size: 1.5rem;
 letter-spacing: 0.75px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+white-space: pre-wrap;
+
 `
 
 const QtdItens = styled.div`

@@ -51,10 +51,10 @@ const ActionPlanPage = () => {
             <SimpleColumn>
                 <SubTopbar>
                     <SimpleRow>
-                        <BackButton><i className="fa fa-long-arrow-alt-left"/> Voltar</BackButton>
+                        {/* <BackButton><i className="fa fa-long-arrow-alt-left"/> Voltar</BackButton> */}
                         <Title>Etapas do projeto</Title>
-                        <ActionButton><i className="fa fa-long-arrow-alt-up"/>N</ActionButton>
-                        <DescriptionActionButton>Para adicionar um novo plano de ação</DescriptionActionButton>
+                        {/* <ActionButton><i className="fa fa-long-arrow-alt-up"/>N</ActionButton>
+                        <DescriptionActionButton>Para adicionar um novo plano de ação</DescriptionActionButton> */}
                     </SimpleRow>
                     <GreenButton onClick={openModalNewActionPlan}><i className="fa fa-plus-circle"/>Plano de
                         ação</GreenButton>

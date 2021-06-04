@@ -1,33 +1,52 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { PROPS_ATTR } from 'react_ujs';
-
+import styled from "styled-components";
 
 const EditableTitle = ({title, editing, setEditing, CustomTitle=<div></div>, redefineTitle, inputStyle={}}) => {
     const [internalTitle, setInternalTitle] = useState(title);
-    
+    useEffect(() => {
+        setTimeout(()=>{initTextArea()}, 100)
+    }, [])
     
     const handleClick = () =>{
         setEditing(true)
         
     }
+
+    const hide = ()=>{
+        setTimeout(()=>{
+            setEditing(false)
+        }, 200)
+    }
     return (
         <React.Fragment>
-                <form style={{width: '100%', display: editing ? "block" : "none"}} action={'javascript:void(0)'} onSubmit={()=> redefineTitle(internalTitle)}>
-                    <input
+                <Form style={{display: editing ? "flex" : "none"}} action={'javascript:void(0)'} onSubmit={()=> redefineTitle(internalTitle)}>
+                    <Input
                         onChange={(e) => setInternalTitle(e.target.value)}
                         tabIndex="0"
-                        ref={ref => ref && editing && ref.focus()}
-                        onBlur={()=>setEditing(false)}
+                        ref={ref => {
+                            ref && editing && ref.focus()
+                            if(ref){
+                                ref.style.height = 'auto';
+                                ref.style.height = ref.scrollHeight+'px';
+                            }
+                            
+                        }}
+                        onBlur={()=>hide()}
                         style={{
-                            width: '100%',
+                            flex: 1,
                             ...inputStyle
                     }}
-                    value={internalTitle || title}></input>
-                </form>
+                    value={internalTitle || title}></Input>
+                    <Button onClick={()=> redefineTitle(internalTitle)}>
+                            Salvar
+                        </Button>
+                </Form>
                 
                 
                 <CustomTitle style={{
-                    display: editing ? "none" : "block"
+                    display: editing ? "none" : "block",
+                    
                 }} onClick={handleClick}>{title}</CustomTitle>
             
         </React.Fragment>
@@ -35,3 +54,40 @@ const EditableTitle = ({title, editing, setEditing, CustomTitle=<div></div>, red
 };
 
 export default EditableTitle;
+
+
+const Form = styled.form`
+    width: 100%;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding-right: 7px;
+` 
+const Input = styled.textarea`
+    border: none;
+    color: #617e94;
+    margin: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: none;
+    outline: none;
+    resize: none
+`
+
+const Button = styled.button`
+border-radius: .6rem;
+height: 4rem;
+padding: 0 2rem;
+color: ${({theme}) => theme.white};
+font-size: 1.2rem;
+font-weight: 500;
+font-stretch: normal;
+font-style: normal;
+line-height: normal;
+letter-spacing: 0.06rem;
+cursor: pointer;
+background-color: #03ab79;
+
+`
+
+

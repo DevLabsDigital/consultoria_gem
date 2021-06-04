@@ -35,10 +35,9 @@ const CheckboxRow = ({label, icon, style, onChangeTitle, ...props}) => {
 export default CheckboxRow;
 
 const LimitedSpan = styled.span`
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+white-space: pre-wrap;
 max-width: 90%;
+padding: 4px 10px;
 `
 const CheckboxRowContainer = styled(SimpleRow)`
 padding: 0 1rem;
@@ -47,7 +46,7 @@ font-size: 1.4rem;
 color: ${({theme}) => theme.darkColor};
 letter-spacing: 0.7px;
 border-radius: .5rem;
-height: 3.5rem;
+min-height: 3.5rem;
 background-color: ${({theme}) => theme.white};
 
 span {
