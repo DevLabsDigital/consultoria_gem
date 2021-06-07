@@ -65,7 +65,6 @@ const ActionPlanPage = () => {
                             id: board.attributes.id,
                             title: board.attributes.title,
                             acoes: <>
-                                <CommentBudget><i className="fa fa-eye"/>Visualizar ATAS</CommentBudget>
                                 <EditBudget onClick={e => {
                                     e.stopPropagation()
                                     dispatch(openNewPlanModal({

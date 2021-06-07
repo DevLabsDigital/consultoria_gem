@@ -29,6 +29,7 @@ Consultoria::Engine.routes.draw do
 	        post ':consultoria_card_id/add_lead', to: 'cards#add_lead'
 	        post ':consultoria_list_id/cards/copy_card', to: 'cards#copy_card'
 	        post ':consultoria_board_id/tags', to: 'tags#create'
+			delete ':consultoria_board_id/tags/:id', to: 'tags#destroy'
 	        post ':consultoria_card_id/tagging', to: 'taggings#create'
 	        post ':consultoria_card_id/comments', to: 'comments#create'
 	        post ':consultoria_card_id/add_user_to_card', to: 'cards#add_user_to_card'

@@ -19,7 +19,7 @@ export const handleAddTag = createAction('actionPlanDetail/handleAddTag')
 export const fetchTags = createAction('actionPlanDetail/fetchTags')
 export const handleAddUser = createAction('actionPlanDetail/handleAddUser')
 export const deleteTag = createAction('actionPlanDetail/deleteTag')
-
+export const removeTag = createAction('actionPlanDetail/removeTag')
 
 const initialState = {
     item: {
@@ -79,7 +79,7 @@ const actionPlanDetailSlice = createSlice({
             state.item = {...state.item, modalChecklist: {visible: false}}
         },
         openAddTagModal(state, action) {
-            state.item = {...state.item, modalTag: {visible: true}}
+            state.item = {...state.item, modalTag: {visible: true, withoutCard: action?.payload?.withoutCard}}
         },
         closeAddTagModal(state, action) {
             state.item = {...state.item, modalTag: {visible: false}}
@@ -307,13 +307,20 @@ function* requestAddTag({payload}) {
     try {
         const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
         const boardId = extractIdFromPathname(pathname)
-        const {name, cardId} = payload
+        const {name, cardId, withoutCard} = payload
 
         const {data} = yield call(api.post, `${boardId}/tags`, {name})
-        yield call(api.post, `${cardId}/tagging`, {consultoria_tag_id: data.data.id})
-        yield put(closeAddTagModal())
+
+        if(!withoutCard){
+            yield call(api.post, `${cardId}/tagging`, {consultoria_tag_id: data.data.id})
+            yield put(closeAddTagModal())
+        }
+
         yield put(fetchTags())
-        yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+
+        if(!withoutCard){
+            yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+        }
     } catch (e) {
         genericError()
         console.log(e)
@@ -345,6 +352,20 @@ function* requestCopyCard({payload}) {
         //yield put(closeAddTagModal())
         yield put(closeCopyCardModal())
         yield put(loadActionPlanData(boardId))
+    } catch (e) {
+        genericError()
+        console.log(e)
+    }
+}
+
+function* requestRemoveTag({payload}) {
+    try {
+        const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
+        const {id} = payload
+        const boardId = extractIdFromPathname(pathname)
+
+        yield call(api.delete, `${boardId}/tags/${id}`)
+        yield put(fetchTags())
     } catch (e) {
         genericError()
         console.log(e)
@@ -518,6 +539,7 @@ export function* actionPlanDetailSaga() {
         takeEvery(fetchTags.type, requestTags),
         takeEvery(handleAddUser.type, requestAddUser),
         takeEvery(deleteTag.type, requestDeleteTag),
+        takeEvery(removeTag.type, requestRemoveTag),
         takeEvery(handleNewCommentRequest.type, requestNewComment),
         takeEvery(handleNewReply.type, requestNewReply),
         takeEvery(editComment.type, requestEditComment),

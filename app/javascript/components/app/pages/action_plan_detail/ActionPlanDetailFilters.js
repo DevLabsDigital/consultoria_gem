@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Input from "../../components/Input";
 import Divider from "../../components/Divider";
 import styled from "styled-components";
-import {Column} from "../../styles/Flex";
+import {Column, Row} from "../../styles/Flex";
 import {TextNormal} from "../../styles/Typography";
 import {SelectableTag} from "../../components/TiposCausaRazao";
 import SimpleRow from "../../components/SimpleRow";
@@ -11,7 +11,7 @@ import UserRow from "../../components/UserRow";
 import api from "../../core/network";
 import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {handleFilterCheck, loadActionPlanData, loadActionPlanDataSuccess} from "../../store/reducers/actionPlanDetail";
+import {handleFilterCheck, loadActionPlanData, loadActionPlanDataSuccess, openAddTagModal} from "../../store/reducers/actionPlanDetail";
 import {closeAddChecklistModal} from "../../store/reducers/actionPlanDetail";
 import { useDebounce } from 'use-debounce';
 import ModalAddUserFilter from "./ModalAddUserFilter";
@@ -19,6 +19,7 @@ import {HOST_URL} from "../../util/values_util";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 const noUser = require('../../assets/user.png')
+
 
 const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
 
@@ -90,7 +91,10 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
             <DividerWithMargin/>
 
             <Padding>
-                <Labels>FILTRE POR CAUSA/RAZÃO</Labels>
+                <div style={{display: 'flex'}}>
+                    <Labels>FILTRE POR CAUSA/RAZÃO</Labels>
+                    <ButtonAddTag style={{marginLeft: 20}} className={'fa fa-edit'} onClick={() => dispatch(openAddTagModal({withoutCard: true}))}/>
+                </div>
                 <FiltrosCausaRazaoContainer>
                     {
                         tags.map(tag => (
@@ -207,6 +211,18 @@ margin-bottom: 1.5rem;
 const Padding = styled.div`
 padding: 2rem;
 position: relative;
+`
+const ButtonAddTag = styled.div`
+  ${Row};
+  justify-content: center;
+  align-items: center;
+  color: ${({theme}) => theme.darkColor};
+  border-radius: .25rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #eaeaea;
+  cursor: pointer;
+  margin-bottom: .5rem;
 `
 
 const FiltrosCausaRazaoContainer = styled(SimpleRow)`

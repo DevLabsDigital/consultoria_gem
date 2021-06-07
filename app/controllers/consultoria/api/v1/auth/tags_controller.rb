@@ -14,6 +14,14 @@ module Api
           business.save!
           render json: serializer_resource(business.tag), status: :created
         end
+
+        def destroy
+          @board = Board.find(params[:consultoria_board_id])
+          @tag = @board.tags.find(params[:id])
+          destroyed = @tag.destroy!
+          
+          render json: {destroyed: destroyed}
+        end
       
         def tag_params
           params.permit(:consultoria_board_id, :name)
