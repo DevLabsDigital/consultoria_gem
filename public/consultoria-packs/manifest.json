@@ -1,15 +1,15 @@
 {
-  "consultoria.js": "/consultoria-packs/js/consultoria-6ded69744cd9bd08485f.js",
-  "consultoria.js.map": "/consultoria-packs/js/consultoria-6ded69744cd9bd08485f.js.map",
+  "consultoria.js": "/consultoria-packs/js/consultoria-a5955ebd51b9bf8757f8.js",
+  "consultoria.js.map": "/consultoria-packs/js/consultoria-a5955ebd51b9bf8757f8.js.map",
   "counter.js": "/consultoria-packs/js/counter-2aee3f7b5181bd5e72e0.js",
   "counter.js.map": "/consultoria-packs/js/counter-2aee3f7b5181bd5e72e0.js.map",
   "entrypoints": {
     "consultoria": {
       "js": [
-        "/consultoria-packs/js/consultoria-6ded69744cd9bd08485f.js"
+        "/consultoria-packs/js/consultoria-a5955ebd51b9bf8757f8.js"
       ],
       "js.map": [
-        "/consultoria-packs/js/consultoria-6ded69744cd9bd08485f.js.map"
+        "/consultoria-packs/js/consultoria-a5955ebd51b9bf8757f8.js.map"
       ]
     },
     "counter": {
@@ -26,5 +26,7 @@
   "media/components/app/assets/random_person_1.jpg": "/consultoria-packs/media/components/app/assets/random_person_1-d9b53079b7026c5b252175846e32a072.jpg",
   "media/components/app/assets/random_person_2.jpg": "/consultoria-packs/media/components/app/assets/random_person_2-a77a09f7671a00b92d8b13c7633e27f8.jpg",
   "media/components/app/assets/random_person_3.jpg": "/consultoria-packs/media/components/app/assets/random_person_3-b6f033741a7ea50bf2197a8b2638100a.jpg",
-  "media/components/app/assets/user.png": "/consultoria-packs/media/components/app/assets/user-6865e506abdcd407c35dc0fa9e029804.png"
+  "media/components/app/assets/user.png": "/consultoria-packs/media/components/app/assets/user-6865e506abdcd407c35dc0fa9e029804.png",
+  "media/images/icon_kanban.svg": "/consultoria-packs/media/images/icon_kanban-a42d12db.svg",
+  "media/images/icon_listas.svg": "/consultoria-packs/media/images/icon_listas-4e0ce68e.svg"
 }

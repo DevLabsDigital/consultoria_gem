@@ -10,6 +10,8 @@ import ActionPlanDetailFilters from "./ActionPlanDetailFilters";
 import {useParams} from "react-router";
 import {TipoFiltroFechamentoDoResultado} from "../../components/TiposCausaRazao";
 import {useDispatch, useSelector} from "react-redux";
+import icon_kanban from "icon_kanban.svg";
+import icon_listas from "icon_listas.svg";
 import {
     changeActionPlanCardPosition,
     changeTemporalyActionPlanCardPosition, deleteCardActionPlan,
@@ -114,6 +116,24 @@ const ActionPlanDetailPage = () => {
     const renderList = ()=>{
         console.log("RENDERED", renderedItens)
         return <WhiteBoard>
+            <div style={{display: 'flex'}}>
+                <PercentageTag black>
+                    <RoundedPercentage>{percentualPrevisto}%</RoundedPercentage>
+                    <PercentageText>PREVISTO</PercentageText>
+                </PercentageTag>
+                <PercentageTag blue>
+                    <RoundedPercentage>{percentualEmAndamento}%</RoundedPercentage>
+                    <PercentageText>EM ANDAMENTO</PercentageText>
+                </PercentageTag>
+                <PercentageTag red>
+                    <RoundedPercentage>{percentualAtrasado}%</RoundedPercentage>
+                    <PercentageText>ATRASADO</PercentageText>
+                </PercentageTag>
+                <PercentageTag green>
+                    <RoundedPercentage>{percentualCompleto}%</RoundedPercentage>
+                    <PercentageText>CONCLUIDO</PercentageText>
+                </PercentageTag>
+            </div>
             {tags.map((tag)=>{
                 return <React.Fragment>
                     <TipoFiltroFechamentoDoResultado label={tag.attributes.name}/>
@@ -164,9 +184,15 @@ const ActionPlanDetailPage = () => {
                 <SubTopbar>
                     <Title>{board?.data?.attributes?.title}</Title>
                     {/*<GreenButton><i className="fa fa-plus-circle"/>Adicionar ATA</GreenButton>*/}
-                    <div style={{width: 100, display: 'flex'}}>
-                        <a href={'javascript::void(0)'} style={{margin: 10}} onClick={()=> setLayout("card")}>Cards</a>
-                        <a href={'javascript::void(0)'} style={{margin: 10}} onClick={()=> setLayout("list")}>Listas</a>
+                    <div style={{display: 'flex', marginRight: 30}}>
+                        <HeaderLink active={layout == "card"} href={'javascript::void(0)'} onClick={()=> setLayout("card")}>
+                            <IconKanban active={layout == "card"} />
+                            Cards
+                        </HeaderLink>
+                        <HeaderLink active={layout == "list"} href={'javascript::void(0)'} onClick={()=> setLayout("list")}>
+                            <IconList active={layout == "list"}/>
+                            Listas
+                        </HeaderLink>
                     </div>
                     
                     
@@ -244,6 +270,93 @@ const ActionPlanDetailPage = () => {
 // ActionPlanDetailPage.routeName = '/plano-de-acao/detalhe'
 
 export default ActionPlanDetailPage;
+
+const HeaderLink = styled.a`
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.7px;
+    text-align: right;
+    color: #2a3170;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin: 10px;
+    ${({ active }) => active && `
+        color: #31b7bc;
+    `}
+`
+
+const IconKanban = styled.div`
+    width: 21px;
+    height: 21px;
+    mask-image: url(${icon_kanban});
+    mask-size: contain;
+    background: #2a3170;
+    margin-right: 5px;
+    ${({ active }) => active && `
+        background: #31b7bc;
+    `}
+`
+
+const IconList = styled.div`
+    width: 21px;
+    height: 21px;
+    mask-image: url(${icon_listas});
+    mask-size: contain;
+    background: #2a3170;
+    margin-right: 5px;
+    ${({ active }) => active && `
+        background: #31b7bc;
+    `}
+`
+
+
+
+const RoundedPercentage = styled.div`
+    border-radius: 81px;
+    border: 1.6px solid;
+    font-size: 10px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.11;
+    -webkit-letter-spacing: 0.05px;
+    -moz-letter-spacing: 0.05px;
+    -ms-letter-spacing: 0.05px;
+    letter-spacing: 0.05px;
+    text-align: center;
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+const PercentageText = styled.div`
+    margin: 8px 0 7px 7px;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1.44px;
+    text-align: left;
+`
+const PercentageTag = styled.div`
+    color: white;
+    width: 190px;
+    height: 40px;
+    margin: 0 6px 57px 0;
+    padding: 5px 13px 6px 16px;
+    border-radius: 5px;
+    background-color: #617e94;
+    display: flex;
+    align-items: center;
+    background-color: ${({theme, black, blue, red, green}) => black ? theme.darkColor : blue ? theme.blueLight2 : red ? theme.red2 : green ? theme.green : null};
+`
 
 const PageContainer = styled.div`
 display: flex;
