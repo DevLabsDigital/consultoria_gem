@@ -7,6 +7,7 @@ import ModalAddChecklist from "../pages/action_plan_detail/modais/ModalAddCheckl
 import ModalAddTag from "../pages/action_plan_detail/modais/ModalAddTag";
 import ModalCopyCard from "../pages/action_plan_detail/modais/ModalCopyCard";
 import ModalAddUser from "../pages/action_plan_detail/modais/ModalAddUser";
+import ModalEditTag from '../pages/action_plan_detail/modais/ModalEditTag';
 
 
 const ModalRoot = (props) => ReactDOM.createPortal(

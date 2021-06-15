@@ -136,7 +136,7 @@ const ActionPlanDetailFilters = ({isExpanded, toogleVisibility}) => {
                         }) : (
                                 <UserRowPlusButton>
                                     <UserRow noImage={true} name={'Filtrar usuario'} />
-                                    <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fa fa-plus-circle"/></PlusButton>
+                                    <PlusButton style={{cursor: 'pointer'}} onClick={() => setModalVisible(true)}><i className="fa fa-search"/></PlusButton>
                                 </UserRowPlusButton>
                             )
                     }

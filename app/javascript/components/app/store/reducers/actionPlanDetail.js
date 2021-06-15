@@ -20,7 +20,7 @@ export const fetchTags = createAction('actionPlanDetail/fetchTags')
 export const handleAddUser = createAction('actionPlanDetail/handleAddUser')
 export const deleteTag = createAction('actionPlanDetail/deleteTag')
 export const removeTag = createAction('actionPlanDetail/removeTag')
-
+export const updateTag = createAction('actionPlanDetail/updateTag')
 const initialState = {
     item: {
         visible: false,
@@ -372,6 +372,20 @@ function* requestRemoveTag({payload}) {
     }
 }
 
+function* requestUpdateTag({payload}) {
+    try {
+        const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
+        const {id, name} = payload
+        const boardId = extractIdFromPathname(pathname)
+
+        yield call(api.put, `${boardId}/tags/${id}`, {name})
+        yield put(fetchTags())
+    } catch (e) {
+        genericError()
+        console.log(e)
+    }
+}
+
 function* requestDeleteTag({payload}) {
     try {
         const {items} = yield select(state => state.actionPlanDetail)
@@ -540,6 +554,7 @@ export function* actionPlanDetailSaga() {
         takeEvery(handleAddUser.type, requestAddUser),
         takeEvery(deleteTag.type, requestDeleteTag),
         takeEvery(removeTag.type, requestRemoveTag),
+        takeEvery(updateTag.type, requestUpdateTag),
         takeEvery(handleNewCommentRequest.type, requestNewComment),
         takeEvery(handleNewReply.type, requestNewReply),
         takeEvery(editComment.type, requestEditComment),

@@ -4,10 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Alteração do Card <strong><%= @card.title %></strong></h1>
-    <p>
-        <%= @alteration %>
-    </p>
+    <% @subjects.group_by{|x| x["card"]}.each do |card, alterations| %>
+      <h1>Alteração do Card <strong><%= card %></strong></h1>
+      <% alterations.each do |alteration| %>
+        <p>
+            <%= alteration["alteration"] %>
+        </p>
+      <%end%>
+    <%end%>
     
     
   </body>

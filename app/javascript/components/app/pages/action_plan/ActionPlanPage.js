@@ -45,6 +45,17 @@ const ActionPlanPage = () => {
         dispatch(openNewPlanModal())
     }
 
+    const listAsHash = (list) => {
+        let hash = {}
+        let total = list.map((x)=> x.cards.length).reduce((a,b)=> a + b, 0)
+        
+        list.map((x)=> {
+            hash[x.status] = (x.cards.length / total) * 100
+        })
+
+        return hash
+    }
+
     return (
         <div>
             <MyThemeProvider>
@@ -64,6 +75,7 @@ const ActionPlanPage = () => {
                         boards.map(board => ({
                             id: board.attributes.id,
                             title: board.attributes.title,
+                            percentage: listAsHash(board.attributes.lists),
                             acoes: <>
                                 <EditBudget onClick={e => {
                                     e.stopPropagation()

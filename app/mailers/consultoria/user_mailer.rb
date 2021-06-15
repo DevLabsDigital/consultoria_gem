@@ -1,10 +1,11 @@
 module Consultoria
   class UserMailer < ApplicationMailer
     def card_changed
-      @user = params[:user]
-      @alteration = params[:alteration]
-      @card = params[:card]
-      mail(to: @user.email, subject: "CleverView - Alteração #{@card.title}")
+      @daily_mail = DailyMail.find(params[:daily_mail_id])
+      @email = @daily_mail.email
+      @subjects = @daily_mail.subjects
+      
+      mail(to: @email, subject: "CleverView - Alteração")
     end
   end
 end

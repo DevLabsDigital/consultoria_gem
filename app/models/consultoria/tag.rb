@@ -4,5 +4,9 @@ class Tag < ApplicationRecord
   has_many :taggings, foreign_key: :consultoria_tag_id, dependent: :destroy
   has_many :cards, through: :taggings
   validates_uniqueness_of :name
+
+  default_scope do
+    order(:created_at)
+  end
 end
 end

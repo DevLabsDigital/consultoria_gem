@@ -15,6 +15,14 @@ module Api
           render json: serializer_resource(business.tag), status: :created
         end
 
+        def update
+          @board = Board.find(params[:consultoria_board_id])
+          @tag = @board.tags.find(params[:id])
+          @tag.update!(name: params[:name])
+          
+          render json: serializer_resource(@tag)
+        end
+
         def destroy
           @board = Board.find(params[:consultoria_board_id])
           @tag = @board.tags.find(params[:id])

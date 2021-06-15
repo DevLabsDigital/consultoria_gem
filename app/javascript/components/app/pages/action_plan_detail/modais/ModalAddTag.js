@@ -3,15 +3,19 @@ import BaseModal from "../../../modais/BaseModal";
 import {useDispatch, useSelector} from "react-redux";
 import Input from "../../../components/Input";
 import ModalSimples from "../../action_plan/modais/ModalSimples";
-import {closeAddTagModal, handleAddTag, removeTag} from "../../../store/reducers/actionPlanDetail";
+import {closeAddTagModal, handleAddTag, removeTag, updateTag} from "../../../store/reducers/actionPlanDetail";
 import CreatableSelect from 'react-select/creatable';
 import api from "../../../core/network";
 import styled,{css} from "styled-components";
+import EditableTag from '../../../pages/action_plan_detail/components/EditableTag'
+
 const ModalAddTag = () => {
 
     const {cardValue, modalTag} = useSelector(state => state.actionPlanDetail.item)
     const {visible: isVisible} = modalTag
+    const [editingTitle, setEditingTitle] = useState(false);
     const dispatch = useDispatch()
+    const [editModalIsVisible, setEditModalIsVisible] = useState(false)
     //const [tags, setTags] = useState([])
     const {tags} = useSelector(state => state.actionPlanDetail)
     const [inputValue, setInputValue] = useState('')
@@ -29,6 +33,9 @@ const ModalAddTag = () => {
         if (isVisible) dispatch(closeAddTagModal())
     }
 
+
+    
+
     const save = () => {
         dispatch(handleAddTag({name: inputValue, cardId: cardValue?.id, withoutCard: modalTag?.withoutCard}))
     }
@@ -37,9 +44,22 @@ const ModalAddTag = () => {
         dispatch(removeTag({id}))
     }
 
+    const saveTagName = (id, name)=>{
+        dispatch(updateTag({id, name}))
+        setEditingTitle(false)
+    }
+
     const handleChange = (newValue) => {
         setInputValue(newValue.value)
     };
+
+    const renderEditButtons = (id) =>{
+        return <div style={{display: editingTitle == id ? "none" : "block"}}>
+                <Icon className={'fa fa-edit'} onClick={()=> setEditingTitle(id)} />
+                <Icon onClick={()=> destroyTag(id)} className={'fa fa-close'} />
+            </div>
+        
+    }
 
     return (
         <BaseModal isVisible={isVisible} closeModal={closeModal} width={'36.8rem'} zIndex={50}>
@@ -58,22 +78,30 @@ const ModalAddTag = () => {
             {modalTag?.withoutCard && <TagContainer>
                 {
                     tags.map(tag => (
-                        <TagLine>
-                            <div>{tag?.attributes?.name}</div>
-                            <div>
-                                {/* <Icon className={'fa fa-edit'} /> */}
-                                <Icon onClick={()=> destroyTag(tag.id)} className={'fa fa-close'} />
-                            </div>
+                        <TagLine>    
+                            <EditableTag
+                            CustomTitle={LimitedSpan}
+                            editing={editingTitle == tag.id}
+                            redefineTitle={(value)=> saveTagName(tag.id, value)}
+                            title={tag?.attributes?.name}
+                            >{tag?.attributes?.name}</EditableTag>
+                            
+                            {renderEditButtons(tag.id)}
                             
                         </TagLine>
                     ))
                 }
             </TagContainer>}
+            
         </BaseModal>
     );
 };
 
 export default ModalAddTag;
+
+const LimitedSpan = styled.span`
+    padding: 4px 10px;
+`
 
 export const Icon = styled.i`
     margin: 0 8px;

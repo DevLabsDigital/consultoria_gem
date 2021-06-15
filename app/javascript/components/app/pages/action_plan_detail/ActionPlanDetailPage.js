@@ -116,33 +116,44 @@ const ActionPlanDetailPage = () => {
     const renderList = ()=>{
         console.log("RENDERED", renderedItens)
         return <WhiteBoard>
-            <div style={{display: 'flex'}}>
-                <PercentageTag black>
-                    <RoundedPercentage>{percentualPrevisto}%</RoundedPercentage>
-                    <PercentageText>PREVISTO</PercentageText>
-                </PercentageTag>
-                <PercentageTag blue>
-                    <RoundedPercentage>{percentualEmAndamento}%</RoundedPercentage>
-                    <PercentageText>EM ANDAMENTO</PercentageText>
-                </PercentageTag>
-                <PercentageTag red>
-                    <RoundedPercentage>{percentualAtrasado}%</RoundedPercentage>
-                    <PercentageText>ATRASADO</PercentageText>
-                </PercentageTag>
-                <PercentageTag green>
-                    <RoundedPercentage>{percentualCompleto}%</RoundedPercentage>
-                    <PercentageText>CONCLUIDO</PercentageText>
-                </PercentageTag>
+            <div style={{display: 'flex', justifyContent: "space-between"}}>
+                <div style={{display: 'flex', width: '100%'}}>
+                    <PercentageTag black>
+                        <RoundedPercentage>{percentualPrevisto}%</RoundedPercentage>
+                        <PercentageText>PREVISTO</PercentageText>
+                    </PercentageTag>
+                    <PercentageTag blue>
+                        <RoundedPercentage>{percentualEmAndamento}%</RoundedPercentage>
+                        <PercentageText>EM ANDAMENTO</PercentageText>
+                    </PercentageTag>
+                    <PercentageTag red>
+                        <RoundedPercentage>{percentualAtrasado}%</RoundedPercentage>
+                        <PercentageText>ATRASADO</PercentageText>
+                    </PercentageTag>
+                    <PercentageTag green>
+                        <RoundedPercentage>{percentualCompleto}%</RoundedPercentage>
+                        <PercentageText>CONCLUIDO</PercentageText>
+                    </PercentageTag>
+                    <div style={{flex: 1, display: 'flex', justifyContent: 'flex-end'}}>
+                        <AddCardButton href={"javascript::void(0)"} onClick={()=> openModalNewCard(renderedItens.scheduled.id)}>
+                            <RoundedPercentage style={{marginRight: 8}}><i className={'fa fa-plus'}></i></RoundedPercentage>
+                            Nova Tarefa
+                        </AddCardButton>
+                    </div>
+                </div>
+               
+                
             </div>
             {tags.map((tag)=>{
                 return <React.Fragment>
                     <TipoFiltroFechamentoDoResultado label={tag.attributes.name}/>
                     {Object.values(renderedItens?.columns)?.map((item, index) => {
                         const value = item
+                        let category = value.list.status
                         let includeTag = value.tags.map((x)=> String(x.id)).includes(String(tag.id))
                         return (
-                             includeTag && <ItemLista key={value.id} index={index} value={value}
-                                        listId={renderedItens.scheduled.id} remove={deleteCard}/>
+                            renderedItens[category].ids > 0 && includeTag && <ItemLista key={value.id} index={index} value={value}
+                                        listId={value?.list?.id} remove={deleteCard}/>
                         )
                     })}
                 </React.Fragment>
@@ -152,6 +163,7 @@ const ActionPlanDetailPage = () => {
     }
 
     useEffect(() => {
+        debugger
         let newItems = {...items}
         
         if(Object.values(filters.status).some(v => v)) {
@@ -270,6 +282,27 @@ const ActionPlanDetailPage = () => {
 // ActionPlanDetailPage.routeName = '/plano-de-acao/detalhe'
 
 export default ActionPlanDetailPage;
+
+const AddCardButton = styled.a`
+  width: 154px;
+  height: 40px;
+  margin: 0 0 57px 285px;
+  padding: 9px 21px 9px 19px;
+  border-radius: 6px;
+  background-color: #03ab79;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-align: left;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const HeaderLink = styled.a`
     font-size: 14px;
