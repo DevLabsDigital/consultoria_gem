@@ -148,12 +148,15 @@ const ActionPlanDetailPage = () => {
                 return <React.Fragment>
                     <TipoFiltroFechamentoDoResultado label={tag.attributes.name}/>
                     {Object.values(renderedItens?.columns)?.map((item, index) => {
-                        const value = item
-                        let category = value.list.status
-                        let includeTag = value.tags.map((x)=> String(x.id)).includes(String(tag.id))
+                        
+                        
+                        let category = item.list.status
+                        let includeTag = item.tags.map((x)=> String(x.id)).includes(String(tag.id))
+                        let includedCategory = renderedItens[category].ids.length > 0
+                        
                         return (
-                            renderedItens[category].ids > 0 && includeTag && <ItemLista key={value.id} index={index} value={value}
-                                        listId={value?.list?.id} remove={deleteCard}/>
+                            (includedCategory && includeTag) && <ItemLista key={item.id} index={index} value={item}
+                                        listId={item?.list?.id} remove={deleteCard}/>
                         )
                     })}
                 </React.Fragment>
@@ -163,7 +166,6 @@ const ActionPlanDetailPage = () => {
     }
 
     useEffect(() => {
-        debugger
         let newItems = {...items}
         
         if(Object.values(filters.status).some(v => v)) {

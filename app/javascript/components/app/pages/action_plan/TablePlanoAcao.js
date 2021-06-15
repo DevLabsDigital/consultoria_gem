@@ -6,7 +6,14 @@ import styled from 'styled-components'
 
 const TablePlanoAcao = ({data, columns}) => {
     const history = useHistory()
-
+    const roundedNumber = (number)=>{
+        if(number.toString() == "NaN"){
+            return 0
+        }else{
+            return parseFloat(number).toFixed(2);
+        }
+        
+    }
     const renderStatus = (value)=>{
         const {scheduled,
             delayed,
@@ -15,16 +22,16 @@ const TablePlanoAcao = ({data, columns}) => {
         
         return <GroupedStatus>
             <StatusTag style={{backgroundColor: statusDict['scheduled'].color}}>
-                <StatusRoundedPercentage>{scheduled}%</StatusRoundedPercentage> {statusDict['scheduled'].label}
+                <StatusRoundedPercentage>{roundedNumber(scheduled)}%</StatusRoundedPercentage> {statusDict['scheduled'].label}
             </StatusTag>
             <StatusTag style={{backgroundColor: statusDict['delayed'].color}}>
-                <StatusRoundedPercentage>{delayed}%</StatusRoundedPercentage> {statusDict['delayed'].label}
+                <StatusRoundedPercentage>{roundedNumber(delayed)}%</StatusRoundedPercentage> {statusDict['delayed'].label}
             </StatusTag>
             <StatusTag style={{backgroundColor: statusDict['in_progress'].color}}>
-                <StatusRoundedPercentage>{in_progress}%</StatusRoundedPercentage> {statusDict['in_progress'].label}
+                <StatusRoundedPercentage>{roundedNumber(in_progress)}%</StatusRoundedPercentage> {statusDict['in_progress'].label}
             </StatusTag>
             <StatusTag style={{backgroundColor: statusDict['completed'].color}}>
-                <StatusRoundedPercentage>{completed}%</StatusRoundedPercentage> {statusDict['completed'].label}
+                <StatusRoundedPercentage>{roundedNumber(completed)}%</StatusRoundedPercentage> {statusDict['completed'].label}
             </StatusTag>
         </GroupedStatus>
     }
@@ -42,7 +49,6 @@ const TablePlanoAcao = ({data, columns}) => {
                 <tbody>
                 {
                     data.map((value, index) => {
-                        debugger
                         return (
                                 <Tr key={index}
                                     onClick={() => history.push(ActionPlanPage.routeName + '/' + data[index].id)}>
