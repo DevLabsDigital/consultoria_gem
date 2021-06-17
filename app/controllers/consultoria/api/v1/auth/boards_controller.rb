@@ -35,7 +35,7 @@ module Api
         end
 
         def destroy
-          board.destroy!
+          board.destroy
           head :no_content
         end
 

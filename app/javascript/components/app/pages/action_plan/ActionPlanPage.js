@@ -97,11 +97,7 @@ const ActionPlanPage = () => {
                                             confirmButtonText: 'Excluir',
                                             cancelButtonText: 'Cancelar'
                                         }).then(() => {
-                                            api.delete('boards', {
-                                                data: {
-                                                    id: board.attributes.id,
-                                                }
-                                            }).then(() => {
+                                            api.delete(`boards/${board.attributes.id}`).then(() => {
                                                 dispatch(listBoardRequest())
                                             })
                                         })
