@@ -5,7 +5,7 @@ module Consultoria
       @email = @daily_mail.email
       @subjects = @daily_mail.subjects
       
-      mail(to: @email, subject: "CleverView - Alteração")
+      mail(to: @email, subject: "CleverView - Alteração #{@daily_mail.company_name}")
     end
   end
 end
