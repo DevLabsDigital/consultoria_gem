@@ -16,7 +16,6 @@ module Consultoria
         end
 
         def self.current_mail_for_user(user)
-            debugger
             company = user.user_profile.user.company
 
             @mail = self.where(email: user.email, company_id: company.id).where("created_at >= ?", Time.now.at_beginning_of_day).first
