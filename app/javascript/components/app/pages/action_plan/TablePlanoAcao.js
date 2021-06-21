@@ -10,7 +10,7 @@ const TablePlanoAcao = ({data, columns}) => {
         if(number.toString() == "NaN"){
             return 0
         }else{
-            return parseFloat(number).toFixed(2);
+            return parseFloat(number).toFixed(0);
         }
         
     }

@@ -121,18 +121,22 @@ const ActionPlanDetailPage = () => {
                     <PercentageTag black>
                         <RoundedPercentage>{percentualPrevisto}%</RoundedPercentage>
                         <PercentageText>PREVISTO</PercentageText>
+                        <LenghtRectangle>{renderedItens?.scheduled?.ids?.length}</LenghtRectangle>
                     </PercentageTag>
                     <PercentageTag blue>
                         <RoundedPercentage>{percentualEmAndamento}%</RoundedPercentage>
                         <PercentageText>EM ANDAMENTO</PercentageText>
+                        <LenghtRectangle>{renderedItens?.in_progress?.ids?.length}</LenghtRectangle>
                     </PercentageTag>
                     <PercentageTag red>
                         <RoundedPercentage>{percentualAtrasado}%</RoundedPercentage>
                         <PercentageText>ATRASADO</PercentageText>
+                        <LenghtRectangle>{renderedItens?.delayed?.ids?.length}</LenghtRectangle>
                     </PercentageTag>
                     <PercentageTag green>
                         <RoundedPercentage>{percentualCompleto}%</RoundedPercentage>
                         <PercentageText>CONCLUIDO</PercentageText>
+                        <LenghtRectangle>{renderedItens?.completed?.ids?.length}</LenghtRectangle>
                     </PercentageTag>
                     <div style={{flex: 1, display: 'flex', justifyContent: 'flex-end'}}>
                         <AddCardButton href={"javascript::void(0)"} onClick={()=> openModalNewCard(renderedItens.scheduled.id)}>
@@ -284,6 +288,24 @@ const ActionPlanDetailPage = () => {
 // ActionPlanDetailPage.routeName = '/plano-de-acao/detalhe'
 
 export default ActionPlanDetailPage;
+const LenghtRectangle = styled.div`
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.12;
+    letter-spacing: 0.6px;
+    color: ${({theme}) => theme.darkColor};
+    min-width: 2.2rem;
+    height: 2.2rem;
+    background-color: ${({theme}) => theme.bodyBackgroundColor};
+    border-radius: .4rem;
+    justify-content: center;
+    margin-left: 1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+`
 
 const AddCardButton = styled.a`
   width: 154px;
@@ -390,6 +412,7 @@ const PercentageTag = styled.div`
     background-color: #617e94;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: ${({theme, black, blue, red, green}) => black ? theme.darkColor : blue ? theme.blueLight2 : red ? theme.red2 : green ? theme.green : null};
 `
 
