@@ -1,24 +1,26 @@
 module Consultoria
     class DailyMail < ApplicationRecord
         after_create :send_mail
+        belongs_to :company
         
         def self.add_mail(properties)
             user = properties[:user]
             alteration = properties[:alteration]
             card = properties[:card]
+            created_at = properties[:created_at]
 
             daily_mail = current_mail_for_user(user)
 
-            daily_mail.add_subject({card: card.title, alteration: alteration})
+            daily_mail.add_subject({card: card.title, alteration: alteration, created_at: created_at})
             daily_mail.save
         end
 
         def self.current_mail_for_user(user)
-            @mail = self.where(email: user.email).where("created_at >= ?", Time.now.at_beginning_of_day).first
+            @mail = self.where(email: user.email, company_id: user.company.id).where("created_at >= ?", Time.now.at_beginning_of_day).first
             if @mail
                 return @mail
             else
-                return DailyMail.create(email: user.email)
+                return DailyMail.create(email: user.email, company_id: user.company.id)
             end
         end
 

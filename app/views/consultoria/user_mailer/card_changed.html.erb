@@ -8,7 +8,8 @@
       <h1>Alteração do Card <strong><%= card %></strong></h1>
       <% alterations.each do |alteration| %>
         <p>
-            <%= alteration["alteration"] %>
+            <strong><%= "#{alteration['created_at'] ? I18n.l(Time.parse(alteration['created_at'].to_s), format: :short) : nil}" %>: </strong>
+            <%= " #{alteration['alteration']}" %>
         </p>
       <%end%>
     <%end%>

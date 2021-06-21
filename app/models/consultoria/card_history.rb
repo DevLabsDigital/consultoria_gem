@@ -9,7 +9,7 @@ module Consultoria
 		card.users.each do |notify_user|
 			if (notify_user.id != user.id) || notify_user.email.include?("benhur.onrails")
 				begin 
-					DailyMail.add_mail(user: notify_user, alteration: self.alteration, card: self.card)
+					DailyMail.add_mail(user: notify_user, alteration: self.alteration, created_at: self.created_at, card: self.card)
 				rescue => e
 					puts e
 				end
