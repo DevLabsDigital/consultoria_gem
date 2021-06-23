@@ -53,7 +53,7 @@ Consultoria::Engine.routes.draw do
 	        delete ':consultoria_card_id/remove_lead', to: 'cards#remove_lead'
 	        delete ':consultoria_list_id/cards/:id', to: 'cards#destroy'
 	        delete 'card_attachments/:consultoria_attachment_id', to: 'card_attachments#destroy'
-	        delete ':consultoria_checklist_id/tasks', to: 'tasks#destroy'
+	        delete ':consultoria_checklist_id/tasks/:id', to: 'tasks#destroy'
 	        #history
 	        get ':consultoria_list_id/cards/:id/history', to: 'cards#card_history'
 

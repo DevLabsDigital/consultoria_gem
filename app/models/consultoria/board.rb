@@ -12,7 +12,6 @@ module Consultoria
 		cloned = self.deep_clone include: [:protocols, :tags, { 
 			lists: [cards: [
 				:checklists,
-				:comments,
 				:user_cards,
 				:users,
 				:tags

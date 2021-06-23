@@ -21,7 +21,7 @@ module Api
         end
 
         def destroy
-          checklist.destroy!
+          checklist.tasks.find(params[:id]).destroy!
           head :no_content
         end
 

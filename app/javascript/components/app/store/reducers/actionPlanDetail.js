@@ -501,8 +501,8 @@ function* requestDeleteTask({payload}) {
     try {
         const {cheklistId, id, cardId} = payload
         const [items] = yield select(state => [state.actionPlanDetail.items])
-        
-        yield call(api.delete, `${cheklistId}/tasks`, {data: {checklist_id: id}})
+        debugger
+        yield call(api.delete, `${cheklistId}/tasks/${id}`)
 
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
     } catch (e) {
