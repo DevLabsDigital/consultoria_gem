@@ -17,6 +17,7 @@ import {listBoardRequest, openNewPlanModal} from "../../store/reducers/actionPla
 import * as MySwal from "sweetalert2";
 import api from "../../core/network";
 import MyThemeProvider from "../../styles/MyThemeProvider";
+
 const ActionPlanPage = () => {
 
     const columns = React.useMemo(
@@ -103,7 +104,30 @@ const ActionPlanPage = () => {
                                         })
                                     }
                                     }
-                                ><i className="fa fa-trash"/> excluir</DeleteBudget></>
+                                ><i className="fa fa-trash"/> excluir</DeleteBudget>
+                                <div style={{marginLeft: 10}}>
+
+                                
+                                    <IconContainerStyled onClick={(e) => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        MySwal.fire({
+                                            title: 'Tem certeza que deseja clonar este registro?',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: 'green',
+                                            confirmButtonText: 'Clonar',
+                                            cancelButtonText: 'Cancelar'
+                                        }).then(() => {
+                                            api.post(`boards/${board.attributes.id}/clone`).then(() => {
+                                                dispatch(listBoardRequest())
+                                            })
+                                        })
+                                    }}><i className="fa fa-clone"/></IconContainerStyled>
+                                </div>
+                                </>
+                                
                         }))
                     } columns={columns}/>
                 </Card>
@@ -120,6 +144,21 @@ const ActionPlanPage = () => {
 ActionPlanPage.routeName = '/plano-de-acao'
 
 export default ActionPlanPage;
+
+const IconContainer = styled(SimpleRow)`
+justify-content: center;
+width: 2.5rem;
+height: 2.5rem;
+border-radius: 50%;
+background-color: ${({theme, hasBackground = true}) => hasBackground ? theme.borderColor : 'transparent'};
+color: ${({theme}) => theme.darkColor};
+cursor: pointer;
+font-size: 1.2rem;
+`
+const IconContainerStyled = styled(IconContainer)`
+                
+                `
+
 
 const BackButton = styled(SimpleRow)`
 background-color: ${({theme}) => theme.grayLight};

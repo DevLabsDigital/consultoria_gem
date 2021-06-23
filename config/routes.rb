@@ -8,6 +8,7 @@ Consultoria::Engine.routes.draw do
 	          get ':consultoria_board_id/protocols', to: 'protocols#index'
 	          post ':consultoria_board_id/protocols', to: 'protocols#create'
 	        end
+			post 'boards/:id/clone', to: 'boards#clone'
 	        resources :boards do
 	          get '/search_by', to: 'boards#search_by'
 	        end

@@ -7,7 +7,7 @@ module Consultoria
     
     has_many :checklists, dependent: :destroy, foreign_key: 'consultoria_card_id'
     has_many :taggings, dependent: :destroy, foreign_key: 'consultoria_card_id'
-    has_many :tags, through: :taggings, foreign_key: 'consultoria_card_id'
+    has_and_belongs_to_many :tags, foreign_key: 'consultoria_card_id', join_table: 'consultoria_taggings', association_foreign_key: "consultoria_tag_id" 
     has_many :comments, dependent: :destroy, foreign_key: 'consultoria_card_id'
     has_many :user_cards, dependent: :destroy, foreign_key: 'consultoria_card_id'
     has_many :users, through: :user_cards, foreign_key: 'consultoria_card_id'

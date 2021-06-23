@@ -34,6 +34,10 @@ module Api
           render json: serializer_resource(business.board), status: :ok
         end
 
+        def clone 
+          board.duplicate
+        end
+
         def destroy
           board.destroy
           head :no_content

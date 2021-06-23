@@ -26,7 +26,7 @@ module Api
         end
       
         def tagging
-          @tagging ||= Tagging.find_by(consultoria_tag_id: params[:consultoria_tag_id])
+          @tagging ||= Tagging.find_by(consultoria_tag_id: params[:consultoria_tag_id], consultoria_card_id: params[:consultoria_card_id])
         end
       end
       
