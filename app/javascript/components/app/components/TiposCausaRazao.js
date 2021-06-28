@@ -18,6 +18,9 @@ color: ${({theme}) => theme.white};
 margin-bottom: 1rem;
 opacity: ${({isDisabled}) => isDisabled ? '.3' : '1'};
 white-space: nowrap;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 `
 
 
@@ -51,7 +54,14 @@ export const TipoFiltroTodos = ({...props}) => {
 
 export const TipoFiltroFechamentoDoResultado = ({label = 'Fechamento do resultado', ...props}) => {
     return (
-        <Container {...props} style={{backgroundColor: '#0099d8'}}><Circle/> {label}</Container>
+        <Container {...props} title={label} style={{backgroundColor: '#0099d8'}}><Circle/>
+            <p style={{
+                display: 'block',
+                maxWidth: 258,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                        }}> {label}</p>
+        </Container>
 
     );
 };

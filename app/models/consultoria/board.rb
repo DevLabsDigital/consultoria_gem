@@ -1,8 +1,8 @@
 module Consultoria
 	class Board < ApplicationRecord
-	  has_many :lists, dependent: :destroy, foreign_key: 'consultoria_board_id'
+	  has_many :lists, foreign_key: 'consultoria_board_id'
 	  has_many :cards, through: :lists
-	  has_many :tags, dependent: :destroy, foreign_key: 'consultoria_board_id'
+	  has_many :tags, foreign_key: 'consultoria_board_id'
 	  has_many :protocols, foreign_key: 'consultoria_board_id'
 	  acts_as_paranoid
       
@@ -20,7 +20,9 @@ module Consultoria
 
 		cloned.title = "#{self.title} clone" 
 	    cloned.save
-		Tagging.clear_duplications
+		cloned.cards.remove_dates
+		Consultoria::Tagging.clear_duplications
+		Consultoria::UserCard.clear_duplications
 		cloned.move_cards_to_begin
 	  end
 
