@@ -35,6 +35,7 @@ Consultoria::Engine.routes.draw do
 	        post ':consultoria_card_id/tagging', to: 'taggings#create'
 	        post ':consultoria_card_id/comments', to: 'comments#create'
 	        post ':consultoria_card_id/add_user_to_card', to: 'cards#add_user_to_card'
+			delete ':consultoria_card_id/cards/:card_id/users/:id', to: 'cards#delete_user_from_card'
 	        put ':consultoria_card_id/comments/:id', to: 'comments#update'
 	        post ':consultoria_card_id/comments/:id/replies', to: 'comments#replies'
 	        post ':consultoria_card_id/checklists', to: 'checklists#create'

@@ -1,6 +1,7 @@
 class UserSerializer < ApplicationSerializer
 	include FastJsonapi::ObjectSerializer
-	attributes :email, :name
+	attributes :email, :name, :id
+	
 
 	attribute :name do |object|
 		object.user_profile.name.to_s.downcase.titleize

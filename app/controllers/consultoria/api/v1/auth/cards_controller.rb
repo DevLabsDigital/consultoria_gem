@@ -58,6 +58,16 @@ module Api
           render json: business.card, status: :ok
         end
 
+        def delete_user_from_card
+          @board = Consultoria::Board.find(params[:consultoria_card_id])
+          @card = @board.cards.find(params[:card_id])
+          @user = @card.users.find(params[:id])
+
+          @card.users.delete(@user)
+          
+          head :no_content
+        end
+
         def remove_users_cards
           @user_card = UserCard.where("consultoria_card_id = ? AND user_id IN (?)", params[:consultoria_card_id], params[:user_ids]).map(&:destroy)
           head :no_content

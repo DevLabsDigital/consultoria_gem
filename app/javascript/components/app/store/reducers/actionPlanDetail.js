@@ -18,6 +18,7 @@ export const handleDeleteCheckList = createAction('actionPlanDetail/handleDelete
 export const handleAddTag = createAction('actionPlanDetail/handleAddTag')
 export const fetchTags = createAction('actionPlanDetail/fetchTags')
 export const handleAddUser = createAction('actionPlanDetail/handleAddUser')
+export const handleDeleteUser = createAction('actionPlanDetail/handleDeleteUser')
 export const deleteTag = createAction('actionPlanDetail/deleteTag')
 export const removeTag = createAction('actionPlanDetail/removeTag')
 export const updateTag = createAction('actionPlanDetail/updateTag')
@@ -341,6 +342,20 @@ function* requestAddUser({payload}) {
     }
 }
 
+function* requestDeleteUser({payload}) {
+    try {
+        const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
+        const boardId = extractIdFromPathname(pathname)
+        const {userId, cardId} = payload
+
+        yield call(api.delete, `${boardId}/cards/${cardId}/users/${userId}`)
+        yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
+    } catch (e) {
+        genericError()
+        console.log(e)
+    }
+}
+
 function* requestCopyCard({payload}) {
     try {
         const [pathname, items] = yield select(state => [state.router.location.pathname, state.actionPlanDetail.items])
@@ -501,7 +516,7 @@ function* requestDeleteTask({payload}) {
     try {
         const {cheklistId, id, cardId} = payload
         const [items] = yield select(state => [state.actionPlanDetail.items])
-        debugger
+        
         yield call(api.delete, `${cheklistId}/tasks/${id}`)
 
         yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
@@ -552,6 +567,7 @@ export function* actionPlanDetailSaga() {
         takeEvery(handleAddTag.type, requestAddTag),
         takeEvery(fetchTags.type, requestTags),
         takeEvery(handleAddUser.type, requestAddUser),
+        takeEvery(handleDeleteUser.type, requestDeleteUser),
         takeEvery(deleteTag.type, requestDeleteTag),
         takeEvery(removeTag.type, requestRemoveTag),
         takeEvery(updateTag.type, requestUpdateTag),

@@ -8,15 +8,16 @@ module Consultoria
             alteration = properties[:alteration]
             card = properties[:card]
             created_at = properties[:created_at]
+            company = properties[:company]
 
-            daily_mail = current_mail_for_user(user)
+            daily_mail = current_mail_for_user(user, company)
 
             daily_mail.add_subject({card: card.title, alteration: alteration, created_at: created_at})
             daily_mail.save
         end
 
-        def self.current_mail_for_user(user)
-            company = user.user_profile.user.company
+        def self.current_mail_for_user(user, company)
+            
 
             @mail = self.where(email: user.email, company_id: company.id).where("created_at >= ?", Time.now.at_beginning_of_day).first
             if @mail
