@@ -113,6 +113,15 @@ const ActionPlanDetailPage = () => {
         dispatch(deleteCardActionPlan({listId, cardId, boardId: params.id}))
     }
 
+    const renderNotTagged = () =>{
+        return <React.Fragment>
+            {Object.values(renderedItens?.columns)?.map((item, index) => {
+                return item.tags.length == 0 && <ItemLista key={item.id} index={index} value={item}
+                                listId={item?.list?.id} remove={deleteCard}/>
+            })}
+        </React.Fragment>
+    }
+
     const renderList = ()=>{
         console.log("RENDERED", renderedItens)
         return <WhiteBoard>
@@ -163,9 +172,11 @@ const ActionPlanDetailPage = () => {
                                         listId={item?.list?.id} remove={deleteCard}/>
                         )
                     })}
+                    
                 </React.Fragment>
             })}
-             
+            <TipoFiltroFechamentoDoResultado label={"Sem categorização"}/>
+             {renderNotTagged()}
         </WhiteBoard>
     }
 

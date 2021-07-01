@@ -4,7 +4,7 @@ import {openAddUserModal} from "../../../store/reducers/actionPlanDetail";
 import {useDispatch, useSelector} from "react-redux";
 import {Row} from "../../../styles/Flex";
 
-const UsersContainer = ({img1, img2, img3}) => {
+const UsersContainer = ({img1, img2, img3, users}) => {
 
     const {cardValue} = useSelector(state => state.actionPlanDetail.item)
     let plusButtonMarginLeft = -20
@@ -20,9 +20,9 @@ const UsersContainer = ({img1, img2, img3}) => {
     const dispatch = useDispatch()
     return (
         <ImagesContainer>
-            {img1 ? <UserImg index={0} isBig src={img1}/> : null}
-            {img2 ? <UserImg index={1} src={img2}/> : null}
-            {img3 ? <UserImg index={2} src={img3}/> : null}
+            {img1 ? <UserImg title={users?.[0]?.name} index={0} isBig src={img1}/> : null}
+            {img2 ? <UserImg title={users?.[1]?.name} index={1} src={img2}/> : null}
+            {img3 ? <UserImg title={users?.[2]?.name} index={2} src={img3}/> : null}
                 {cardValue && !img1 ? <span  style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Usuario</span> : null}
                     {cardValue ? <ButtonAddUser plusButtonMarginLeft={plusButtonMarginLeft} className={'fa fa-plus-circle'} onClick={(e) => {
                 e.stopPropagation()

@@ -198,9 +198,11 @@ const ModalItemQuadro = (props) => {
 
                     </SimpleRow>
                     <SimpleRow>
-                        <UsersContainer img1={getImage(users[0])}
-                                        img2={getImage(users[1])}
-                                        img3={getImage(users[2])}/>
+                        <UsersContainer 
+                            users={users}
+                            img1={getImage(users[0])}
+                            img2={getImage(users[1])}
+                            img3={getImage(users[2])}/>
                     </SimpleRow>
                 </SimpleRow>
                 <ActionsHeader>
@@ -259,7 +261,8 @@ const ModalItemQuadro = (props) => {
                     }
                     <SimpleRow>
                         {!tags.length ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Tag</span> : null}
-                        <ButtonAddTag style={{marginLeft: !tags.length ? '10px' : 0}} className={'fa fa-plus-circle'} onClick={() => dispatch(openAddTagModal())}/>
+                        {tags.length == 0 && 
+                        <ButtonAddTag style={{marginLeft: !tags.length ? '10px' : 0}} className={'fa fa-plus-circle'} onClick={() => dispatch(openAddTagModal())}/>}
                     </SimpleRow>
                 </SimpleRow>
                 <Title>

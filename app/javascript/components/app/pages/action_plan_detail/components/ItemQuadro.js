@@ -76,7 +76,9 @@ const ItemQuadro = ({value, listId, index, remove}) => {
                                 </SimpleColumn>
                             </SubContainer>
                             <Footer>
-                                <UsersContainer img1={getImage(users[0])}
+                                <UsersContainer 
+                                                users={users}
+                                                img1={getImage(users[0])}
                                                 img2={getImage(users[1])}
                                                 img3={getImage(users[2])}/>
                                 <SimpleRow>

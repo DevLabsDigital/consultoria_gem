@@ -46,6 +46,7 @@ const ItemLista = ({value, listId, index, remove}) => {
                     </StatusTag>
                     <Separator/>
                     <UsersContainer img1={getImage(users[0])}
+                                users={users}
                                 img2={getImage(users[1])}
                                 img3={getImage(users[2])}/>
                     <Separator/>
