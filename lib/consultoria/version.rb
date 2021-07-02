@@ -1,3 +1,2 @@
 module Consultoria
-  VERSION = '0.3.39'
-end
+  VERSION = '0.3.40'
