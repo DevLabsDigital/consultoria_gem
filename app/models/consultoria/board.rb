@@ -30,5 +30,14 @@ module Consultoria
 		first_list = self.lists.where(status: "scheduled").first
 		self.cards.update_all(consultoria_list_id: first_list.id)
 	  end
+
+	  def percentages_by_list
+		percentages = {}
+		total = cards.count.to_f
+		lists.each do |list|
+			percentages[list.status] = ((list.cards.count.to_f / total) * 100).to_i
+		end
+		return percentages
+	  end
 	end
 end

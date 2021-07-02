@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    consultoria (0.3.37)
+    consultoria (0.3.38)
       paper_trail (= 11.1.0)
       rails (~> 5.2.4.5, >= 5.2.4.5)
       react-rails (= 2.6.0)
@@ -63,6 +63,8 @@ GEM
     acts_as_paranoid (0.7.0)
       activerecord (>= 5.2, < 7.0)
       activesupport (>= 5.2, < 7.0)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
@@ -80,6 +82,8 @@ GEM
     concurrent-ruby (1.1.8)
     connection_pool (2.2.3)
     crass (1.0.6)
+    css_parser (1.9.0)
+      addressable
     deep_cloneable (3.1.0)
       activerecord (>= 3.1.0, < 7)
     devise (4.7.3)
@@ -123,6 +127,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    htmlentities (4.3.4)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     listen (3.4.1)
@@ -154,9 +159,17 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     pg (1.2.3)
+    premailer (1.15.0)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.11.1)
+      actionmailer (>= 3)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.14.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (4.0.6)
     puma (4.3.7)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -275,6 +288,7 @@ DEPENDENCIES
   listen (~> 3.2)
   mimemagic!
   pg (>= 0.18, < 2.0)
+  premailer-rails
   pry
   puma (~> 4.1)
   rack-cors

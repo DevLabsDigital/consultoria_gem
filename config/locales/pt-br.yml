@@ -1,6 +1,10 @@
 ---
 
 pt-BR:
+  scheduled: Previsto
+  delayed: Atrasado
+  in_progress: Em andamento
+  completed: Concluido
   date:
     abbr_day_names:
     - dom

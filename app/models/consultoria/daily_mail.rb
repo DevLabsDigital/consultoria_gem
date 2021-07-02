@@ -9,16 +9,18 @@ module Consultoria
             card = properties[:card]
             created_at = properties[:created_at]
             company = properties[:company]
-
+            board = card.list.board
             daily_mail = current_mail_for_user(user, company)
 
-            daily_mail.add_subject({card: card.title, alteration: alteration, created_at: created_at})
+            daily_mail.add_subject({percentages_by_list: board.percentages_by_list, 
+                                    board_label: board.title, 
+                                    card: card.title, 
+                                    alteration: alteration, 
+                                    created_at: created_at})
             daily_mail.save
         end
 
         def self.current_mail_for_user(user, company)
-            
-
             @mail = self.where(email: user.email, company_id: company.id).where("created_at >= ?", Time.now.at_beginning_of_day).first
             if @mail
                 return @mail
@@ -33,7 +35,7 @@ module Consultoria
 
         def send_mail
             seconds_to_wait = (Time.now.at_beginning_of_day + 7.hours) - Time.now
-            UserMailer.with(daily_mail_id: self.id).card_changed.deliver_later!(wait: seconds_to_wait.seconds) 
+            UserMailer.with(daily_mail_id: self.id).card_changed.deliver_now!
         end
       
     end

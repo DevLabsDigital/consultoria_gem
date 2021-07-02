@@ -1,3 +1,4 @@
+
 module Consultoria
   class UserMailer < ApplicationMailer
     def card_changed
