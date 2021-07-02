@@ -35,7 +35,7 @@ module Consultoria
 
         def send_mail
             seconds_to_wait = (Time.now.at_beginning_of_day + 7.hours) - Time.now
-            UserMailer.with(daily_mail_id: self.id).card_changed.deliver_now!
+            UserMailer.with(daily_mail_id: self.id).card_changed.deliver_later!(wait: seconds_to_wait.seconds) 
         end
       
     end
