@@ -11,10 +11,10 @@ module Consultoria
 	  def duplicate
 		cloned = self.deep_clone include: [:protocols, :tags, { 
 			lists: [cards: [
-				:checklists,
 				:user_cards,
 				:users,
-				:tags
+				:tags,
+				checklists: [:tasks],
 			]
 		] } ], use_dictionary: true
 

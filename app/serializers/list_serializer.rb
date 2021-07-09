@@ -13,7 +13,7 @@ class ListSerializer < ApplicationSerializer
         list
         .cards
         .joins(:taggings)
-        .includes(:tags, :taggings)
+        .includes(:taggings)
         .where('consultoria_taggings.consultoria_tag_id IN (?)', params[:options][:tag_ids])
       elsif params[:options][:user_ids]
         list

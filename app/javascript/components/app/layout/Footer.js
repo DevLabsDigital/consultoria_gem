@@ -6,7 +6,7 @@ import {TextNormal} from "../styles/Typography";
 const Footer = () => {
     return (
         <FooterContainer>
-            <FooterText>© copyright 2019 - Agrega Consultoria - All rights reserved.</FooterText>
+            <FooterText>© copyright 2021 - Agrega Consultoria - All rights reserved.</FooterText>
             <SimpleRow>
                 <FooterText>Powered by</FooterText>
 

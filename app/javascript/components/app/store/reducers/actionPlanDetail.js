@@ -322,6 +322,7 @@ function* requestAddTag({payload}) {
         if(!withoutCard){
             yield put(handleOpenCardActionPlan({listId: findListid(cardId, items), cardId}))
         }
+        yield put(loadActionPlanData(boardId))
     } catch (e) {
         genericError()
         console.log(e)
@@ -381,6 +382,7 @@ function* requestRemoveTag({payload}) {
 
         yield call(api.delete, `${boardId}/tags/${id}`)
         yield put(fetchTags())
+        yield put(loadActionPlanData(boardId))
     } catch (e) {
         genericError()
         console.log(e)

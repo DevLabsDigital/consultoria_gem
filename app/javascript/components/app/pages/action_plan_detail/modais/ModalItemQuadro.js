@@ -260,7 +260,7 @@ const ModalItemQuadro = (props) => {
                         ))
                     }
                     <SimpleRow>
-                        {!tags.length ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Tag</span> : null}
+                        {!tags.length ? <span style={{color: 'rgb(97, 126, 148)', fontWeight: 'bold'}}>Insira uma causa / razão</span> : null}
                         {tags.length == 0 && 
                         <ButtonAddTag style={{marginLeft: !tags.length ? '10px' : 0}} className={'fa fa-plus-circle'} onClick={() => dispatch(openAddTagModal())}/>}
                     </SimpleRow>
