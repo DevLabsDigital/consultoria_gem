@@ -58,7 +58,7 @@ const TablePlanoAcao = ({data, columns}) => {
                                             {renderStatus(value)}
                                         </div>
                                     </Td>
-                                    <Td style={{width: '8rem'}}>{value.acoes}</Td>
+                                    <Td style={{width: '14rem'}}>{value.acoes}</Td>
                                 </Tr>
                             )
                         }

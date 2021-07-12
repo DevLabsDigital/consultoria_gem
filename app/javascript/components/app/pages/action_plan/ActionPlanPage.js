@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SubTopbar from "../../layout/SubTopbar";
 import Title from "../../components/Title";
 import {GreenButton} from "../../components/buttons/Button";
@@ -10,13 +10,14 @@ import {TextNormal} from "../../styles/Typography";
 import HistoryChart from "../../shared/graphs/HistoryChart";
 import DashboardChart from "../../shared/graphs/DashboardChart";
 import Card from "../../components/Card";
-import {CommentBudget, DeleteBudget, EditBudget} from "../../components/Budget";
+import {CommentBudget, DeleteBudget, ReactivateBudget, EditBudget} from "../../components/Budget";
 import TablePlanoAcao from "./TablePlanoAcao";
 import {useDispatch, useSelector} from "react-redux";
 import {listBoardRequest, openNewPlanModal} from "../../store/reducers/actionPlan";
 import * as MySwal from "sweetalert2";
 import api from "../../core/network";
 import MyThemeProvider from "../../styles/MyThemeProvider";
+import theme from 'styled-theming';
 
 const ActionPlanPage = () => {
 
@@ -35,12 +36,13 @@ const ActionPlanPage = () => {
     )
 
     const dispatch = useDispatch()
+    const [currentState, setCurrentState] = useState("active")
 
     useEffect(() => {
         dispatch(listBoardRequest())
     }, [])
 
-    const {boards} = useSelector(state => state.actionPlan)
+    const {boards, inactive_boards} = useSelector(state => state.actionPlan)
 
     const openModalNewActionPlan = () => {
         dispatch(openNewPlanModal())
@@ -68,12 +70,17 @@ const ActionPlanPage = () => {
                         {/* <ActionButton><i className="fa fa-long-arrow-alt-up"/>N</ActionButton>
                         <DescriptionActionButton>Para adicionar um novo plano de ação</DescriptionActionButton> */}
                     </SimpleRow>
-                    <GreenButton onClick={openModalNewActionPlan}><i className="fa fa-plus-circle"/>Plano de
-                        ação</GreenButton>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <Tabs>
+                            <TabLink active={currentState == "active"} onClick={()=> setCurrentState("active")}>Ativos</TabLink>
+                            <TabLink active={currentState == "inactive"} onClick={()=> setCurrentState("inactive")}>Inativos</TabLink>
+                        </Tabs>
+                        <GreenButton onClick={openModalNewActionPlan}><i className="fa fa-plus-circle"/>Plano de ação</GreenButton>
+                    </div>
                 </SubTopbar>
                 <Card>
                     <TablePlanoAcao data={
-                        boards.map(board => ({
+                        (currentState == "active" ? boards : inactive_boards).map(board => ({
                             id: board.attributes.id,
                             title: board.attributes.title,
                             percentage: listAsHash(board.attributes.lists),
@@ -86,16 +93,18 @@ const ActionPlanPage = () => {
                                     }))
                                 }
                                 }><i className="fa fa-pen"/>editar</EditBudget>
+                                
+
                                 <DeleteBudget
                                     onClick={(e) => {
                                         e.stopPropagation()
                                         MySwal.fire({
-                                            title: 'Tem certeza que deseja deletar este registro?',
+                                            title: currentState == "active" ? 'Tem certeza que deseja deletar este registro?' : "Tem certeza de que deseja ativar este registro?",
                                             icon: 'warning',
                                             showCancelButton: true,
                                             showConfirmButton: true,
-                                            confirmButtonColor: 'red',
-                                            confirmButtonText: 'Excluir',
+                                            confirmButtonColor: currentState == "active" ? 'red' : 'green',
+                                            confirmButtonText: currentState == "active" ? 'Excluir' : "Ativar",
                                             cancelButtonText: 'Cancelar'
                                         }).then(() => {
                                             api.delete(`boards/${board.attributes.id}`).then(() => {
@@ -104,7 +113,30 @@ const ActionPlanPage = () => {
                                         })
                                     }
                                     }
-                                ><i className="fa fa-trash"/> excluir</DeleteBudget>
+                                >{currentState == "active" ? <><i className="fa fa-trash"/> excluir</> : "ativar" } </DeleteBudget>
+                              <ReactivateBudget
+                                style={{
+                                    backgroundColor: currentState == "active" ? "#ca2149" : "rgb(0, 156, 83)"
+                                }}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    MySwal.fire({
+                                        title: currentState == "active" ? 'Tem certeza que deseja desativar este registro?' : "Tem certeza de que deseja ativar este registro?",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        showConfirmButton: true,
+                                        confirmButtonColor: currentState == "active" ? 'red' : 'green',
+                                        confirmButtonText: currentState == "active" ? "Desativar" : "Ativar",
+                                        cancelButtonText: 'Cancelar'
+                                    }).then(() => {
+                                        api.post(`boards/${board.attributes.id}/toggle_inactive`).then(() => {
+                                            dispatch(listBoardRequest())
+                                        })
+                                    })
+                                }
+                                }
+                            >{currentState == "active" ? "desativar" : "reativar" } </ReactivateBudget>
+                            
                                 <div style={{marginLeft: 10}}>
 
                                 
@@ -158,7 +190,25 @@ font-size: 1.2rem;
 const IconContainerStyled = styled(IconContainer)`
                 
                 `
+const Tabs = styled.div`
+    display: flex;
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: .1rem;
+    margin-right: 16px;
 
+` 
+const TabLink = styled.div`
+    margin: 0 10px;
+    cursor: pointer;
+    color: ${({theme}) => theme.blueDark};
+    ${({ active }) => active && `
+        color:  #31b7bc;
+    `}
+`
 
 const BackButton = styled(SimpleRow)`
 background-color: ${({theme}) => theme.grayLight};

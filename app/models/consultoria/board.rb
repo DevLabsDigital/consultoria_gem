@@ -26,6 +26,11 @@ module Consultoria
 		cloned.move_cards_to_begin
 	  end
 
+	  def toggle_inactive
+		self.is_inactive = !self.is_inactive
+		self.save
+	  end
+
 	  def move_cards_to_begin
 		first_list = self.lists.where(status: "scheduled").first
 		self.cards.update_all(consultoria_list_id: first_list.id)

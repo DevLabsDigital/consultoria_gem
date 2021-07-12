@@ -49,6 +49,11 @@ background-color: ${({theme}) => theme.red};
 cursor: pointer;
 `
 
+export const ReactivateBudget = styled(Budget)`
+cursor: pointer;
+margin-left: 6px;
+`
+
 export const OkBudget = styled(Budget)`
 background-color: ${({theme}) => theme.greenLight};
 `

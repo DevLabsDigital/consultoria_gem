@@ -9,6 +9,7 @@ Consultoria::Engine.routes.draw do
 	          post ':consultoria_board_id/protocols', to: 'protocols#create'
 	        end
 			post 'boards/:id/clone', to: 'boards#clone'
+			post 'boards/:id/toggle_inactive', to: 'boards#toggle_inactive'
 	        resources :boards do
 	          get '/search_by', to: 'boards#search_by'
 	        end

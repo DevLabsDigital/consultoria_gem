@@ -5,8 +5,9 @@ module Api
       class BoardsController < AuthController
 
         def index
-          @board = Board.where(company_id: current_user.consultoria_company_id).all
-          render json: serializer_resource(@board), status: :ok
+          @active_board = Board.where(company_id: current_user.consultoria_company_id).where(is_inactive: false)
+          @inactive_board = Board.where(company_id: current_user.consultoria_company_id).where(is_inactive: true)
+          render json: {active: serializer_resource(@active_board), inactive: serializer_resource(@inactive_board)}, status: :ok
         end
 
         def show
@@ -36,6 +37,11 @@ module Api
 
         def clone 
           board.duplicate
+        end
+
+        def toggle_inactive
+          board.toggle_inactive
+          head :no_content
         end
 
         def destroy

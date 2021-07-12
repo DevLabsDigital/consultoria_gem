@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     modalNewPlanVisible: false,
     modalActionPlanData: null,
     boards: [],
+    inactive_boards: []
 }
 
 const actionPlanSlice = createSlice({
@@ -28,7 +29,10 @@ const actionPlanSlice = createSlice({
         listBoardRequest() {
         },
         listBoardSuccess(state, action) {
-            state.boards = action.payload
+            if (action.payload){
+                state.boards = action.payload.active.data
+                state.inactive_boards = action.payload.inactive.data
+            }
         },
     }
 })
@@ -68,7 +72,8 @@ function* requestNewActionPlan({payload}) {
 function* listBoards() {
     try {
         const {data: response} = yield call(api.get, '/boards')
-        yield put(listBoardSuccess(response.data))
+        
+        yield put(listBoardSuccess(response))
     } catch (e) {
         genericError()
         console.log(e)

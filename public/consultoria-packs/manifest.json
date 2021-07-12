@@ -1,15 +1,15 @@
 {
-  "consultoria.js": "/consultoria-packs/js/consultoria-d033b1eed101679c2339.js",
-  "consultoria.js.map": "/consultoria-packs/js/consultoria-d033b1eed101679c2339.js.map",
+  "consultoria.js": "/consultoria-packs/js/consultoria-80ca925d74005179688f.js",
+  "consultoria.js.map": "/consultoria-packs/js/consultoria-80ca925d74005179688f.js.map",
   "counter.js": "/consultoria-packs/js/counter-2aee3f7b5181bd5e72e0.js",
   "counter.js.map": "/consultoria-packs/js/counter-2aee3f7b5181bd5e72e0.js.map",
   "entrypoints": {
     "consultoria": {
       "js": [
-        "/consultoria-packs/js/consultoria-d033b1eed101679c2339.js"
+        "/consultoria-packs/js/consultoria-80ca925d74005179688f.js"
       ],
       "js.map": [
-        "/consultoria-packs/js/consultoria-d033b1eed101679c2339.js.map"
+        "/consultoria-packs/js/consultoria-80ca925d74005179688f.js.map"
       ]
     },
     "counter": {
